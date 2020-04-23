@@ -1,0 +1,167 @@
+/Annotations:
+--------------
+Dev will specify the config using annotations..
+  
+ 
+  
+
+Annotations for the Bean classes: (write these annotations before class name) 
+=======================================================================================
+@Controller    -> Controller class
+@Service       -> Service class
+@Repository    -> DAO class
+  
+@Component  -> Controller / Service/ DAO /Helper
+syntax:
+1.<bean id ="pControl" class="ProductController" />
+   
+   
+@Controller("pControl")// pControl is the bean id
+public class ProductController{
+                                            
+  
+}
+
+
+2.
+    <bean id ="pService" class="ProductService" />
+      
+@Service("pService")// pServie is the bean id
+public class ProductService{               
+                                          
+  
+}
+
+
+3.
+  <bean id ="pDAO" class="ProduuctDAO" />
+    
+@Repository("pDAO")// pServie is the bean id 
+public class ProduuctDAO{
+                                          
+  
+}
+
+4.   <bean id ="pDAO" class="ProduuctDAO" />
+    
+@Component("pDAO")// pServie is the bean id 
+public class ProduuctDAO{
+                                          
+  
+}
+
+  
+Annotations for resolving dependencies:
+=========================================
+(before instance variables / before constr / before setter method)  
+
+
+@Autowired   -> autowire By Type
+@Resource  -> autowire by name
+[replacement for property tag/constr-arg ]
+
+
+
+ex1:
+
+ProductController has ProductService as dependency
+
+ <bean id ="pControl" class="ProductController" autowire="ByType">
+  </bean>
+  
+   <bean id ="pService" class="ProductService" >
+  </bean>
+  
+  
+@Controller("pControl")// pControl is the bean id for ProductService
+public class ProductController{
+                                            
+   @Autowired // this annotation will resolve the deoendency usning the class name
+   ProductService myserv;                                            
+                                                                                      
+}
+
+
+ 
+@Controller("pService")// pServcie is the bean id for ProductService
+public class ProductService{
+                                            
+ 
+}
+  
+
+
+
+
+
+ex2:
+
+ProductController has ProductService as dependency
+
+ <bean id ="pControl" class="ProductController" autowire="ByName">
+  </bean>
+  
+   <bean id ="pService" class="ProductService" >
+  </bean>
+  
+  
+@Controller("pControl")// pControl is the bean id for ProductService
+public class ProductController{
+                                            
+@Resource(name="pService") // this annotation will resolve the deoendency. , resolv ethe dependency using the bena id
+ProductService myserv;                                            
+                                                                                      
+}
+
+
+ 
+@Controller("pService") // pServcie is the bean id for ProductService
+public class ProductService{
+                                            
+ 
+}
+  
+   
+
+
+Provide configuration class:
+----------------------------------
+    
+@Configuration
+@ComponentScan(basePackages={"mypackage1","service"}) // springs wil scan only two packages "mypackage1","service"
+public class ApplicationConfig {
+ 
+}
+  
+
+
+How to get bean obj:-
+  ==========================
+  
+  
+  AbstractApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+		//approach1
+		ProductController application = (ProductController) context.getBean("pControl");
+		//approach2
+		ProductController application1 = (ProductController) context.getBean(ProductController.class);
+		
+
+
+
+pacakge annotations.autowire
+
+
+1. create config class
+2. create bean classes using 
+@Controller    -> Controller class
+@Service       -> Service class
+@Repository    -> DAO class
+  
+@Component  -> Controller / Service/ DAO /Helper
+
+and resolve the dependency using
+@Autowired   -> autowire By Type
+@Resource  -> autowire by name
+[replacement for property tag/constr-arg ]
+
+3.craete main class

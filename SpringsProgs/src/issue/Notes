@@ -1,0 +1,52 @@
+A project is develope dusing a layered architecture
+every layer is independent .
+  
+	UI 	    ------>          	 Presentation      		------>		       Service layer   	------>	       Integration Layer     	------>	     	DAO Layer    ------> 			     DB layer
+          <------															  	<------                           <------         (optional)            <------                     <------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Front end develpment         -Request capturing						 				-	business related							- for 3rd party communication				-	DB related code							      data storage and maintain
+web pages development        -req validation											-txn , security ,business				-	acts as bridge between						- acts a  bridge between					 maintain tables, stores pro,funtions
+events handling              -req deligation	                      valdation                      3rd party and java app              	db and java layer																																																											 		
+                             -response preparation                                       
+                             -acts as bridge between web pages
+                             and java app
+                         
+tech:													tech:												 					tech:														tech:															tech:															tech: 
+html                          servlets + jsp OR											EJB															hadoop         										jdbc  														oracle	
+java scipt                    struts  OR														Springs													cloud 														hibernate													sql server
+jquery                        springs mvc OR																												web services	  									spring jdbc 											hana
+css                           JSF																																		spring cloud											jpa																my sql
+angular js                                                                                          spring rest                            eclipse link
+node js                                                                                                                               top link
+react js                                                                                                                              ibatics
+
+
+customer -------------------> paytm/goibibo/yatra/redbus/abhibus   --------------> Flight for airasia
+
+UI ---------> Frontend
+Presentation till DB ----> Backend
+Presentation til DAO --> Java development
+This layered is also represents the flow of request from the client.
+
+
+Hibernate  supports only for dao layer
+
+framework (prewritten code that contains solution for all common prblms in the project)
+  
+
+Springs framework:
+-----------------------------
+- Open source
+- lightweight framework
+- supports all the layers
+- framework of frameworks because it provides support to various frameworks
+- has different modules ex: IOC, AOP, DAO, Context, ORM, WEB MVC , Securit , Boot , clud,
+batch , trasaction , msg service , 
+-  Every module is available in the form of jar files. include only the required jar files
+-  Loose Coupling
+- Fast Development for enterprise apps.
+- requires just simple configuration and there is no need to use app server . 
+- POJO Based development
+- inbuilt design patterns 
+- Provides predefined templates for JDBC, Hibernate, JPA, web  etc., thus reducing your effort of writing too much code.
+

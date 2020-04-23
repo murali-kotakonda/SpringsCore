@@ -1,0 +1,10 @@
+ autowire 
+------------
+reduces the effort of writing properties or constructor arguments
+skip the some of configuration in XML file.
+
+AUTO-WIRING "NO"
+AUTO-WIRING "BYNAME"
+AUTO-WIRING "BYTYPE"
+AUTO-WIRING "CONSTRUCTOR"
+AUTO-WIRING "AUTODETECT"

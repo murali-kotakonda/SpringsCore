@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="uService" 
+		class="constrInject4list.UserService">
+		<constructor-arg value="admin" ></constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

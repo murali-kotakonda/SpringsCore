@@ -1,0 +1,15 @@
+
+For resolving dependencies we have two approaches:
+  
+  1. Constructor injection
+  2. Setter  Injection
+  
+  
+  																	Bean class																Springs.xml
+-------------------------------------------------------------------------------------------------------------    
+Constr Injection:                 Write the param constructor                <bean> 
+  																with dependencies as arguments							   write  <constructor-arg> tag for every dependency    																		
+  																             																</bean>
+Setter Injection:                Write setter methods for                     <bean>
+  																every dependency															write the <property> tag for every dependency
+    																																					</bean>	

@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="uService" 
+	class="scopes.UserService" 
+	scope="prototype">
+		<constructor-arg value="admin" ></constructor-arg>
+		<constructor-arg value="admin122" ></constructor-arg>
+	</bean>
+	
+	<bean id="rService" 
+	class="scopes.RegistrationService" 
+	scope="singleton">
+		<constructor-arg value="rTesting" ></constructor-arg>
+	</bean>
+		
+</beans>

@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="aService" 
+	class="autowireConstuctor.AccountService" 
+	autowire="constructor" />
+	 
+	 <bean id="cService" 
+	class="autowireConstuctor.CustomerService" 
+	autowire="constructor" />
+	
+	<bean id="dao1" class="autowireConstuctor.DaoImpl" >
+		<property name="config" value="SQLserver1" />
+	</bean>
+
+	<bean id="lService" 
+	class="autowireConstuctor.LoanService" 
+	autowire="constructor" />
+	
+	
+	<bean id="uService" 
+	class="autowireConstuctor.UserService" 
+	autowire="constructor" />
+
+	<!--  <bean id="cService" 
+	class="com.springs.autowireConstuctor.CustomerService" scope="prototype" />
+	 -->
+	 
+</beans>

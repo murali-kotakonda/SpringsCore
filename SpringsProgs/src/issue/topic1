@@ -1,0 +1,98 @@
+caller has to take the risk for resolving dependency.
+
+
+-> Cosumer has to resolve dependencies
+-> In case if any dependency is added , the consumer has to take risk to resolve the dependencies..
+
+-> Multi consumers who calls the method has to resolve the dependencies..
+-> Developer is not sure  how to resolve dependencis  and not sure of how many dependencies.......
+
+
+class ProductController{
+  
+  ProductService service  = new ProductService(); // obj created every time
+}
+
+
+There are two types of classes:
+  ----------------
+  1. Pojo  -> i.v + setters + getters 
+  2.Business/Bean/Service  -> i.v + setters + getters  + business logic
+  
+  
+  
+  2.Pojo obj has realtime data/ customer i/p data or cust outcome data
+    Bean objs doesnot contain relatime data
+    
+  3.Resolving dependencis is mandatory for bean objs
+  
+  4.Pojo obj has to be created for every request
+   Bean Objs should be created only one time (i.e. first request)
+    
+  5. Pojo obj  will be deleted once response is given to customer,
+  but bean objs will be available.....
+    
+    
+  Problems:
+    1. To resolve chain of  dependencies for a bean object.
+    2. Maintain single obj for the bean classes through out the application.
+    
+    bean obj to be created by springs
+    pojo obj to be created by springs
+    
+    
+
+Springs has solution using dependency injection:
+------------------------------------------------------
+
+1.Springs will create the object for all the Bean classes...
+ex: ProuctController, ProductService, ProductHelper, ProductDAO
+  
+2.Springs also resolves the dependecies for every bean obj..
+
+
+3. Spring container will manage the single bean objs for every Bean class..
+Spring container contains pool of bean objs...
+
+
+4. Developer has to get the bean obj from springs and calls the respective methods....
+
+
+
+How to specify to springs what are the Bean classes?
+a) Springs.xml
+b) Annotations
+
+Springs.xml
+-----------
+->We need write a <bean> tag for very Bean class..
+
+<beans>
+<bean id="control" class="ex1.ProductController" />
+ <bean id="service" class="ex1.ProductService" />
+  <bean id="dao" class="ex1.ProductDao" />
+  <bean id="helper" class="ex1.ProductHelper" />
+</bean>
+
+every bean tag has bean id + class name
+
+
+Syntax for getting bean obj:
+---------------------------------
+
+1.Create applicationcontext obj using springs.xml
+2.This obj should be created only once.....
+3.using this obj develper can get any bean obj 
+
+
+
+1. Create app context obj
+ApplicationContext context = new ClassPathXmlApplicationContext("file:src/ex1/springs.xml");
+
+2.get bean obj using bean id
+ProductController controlObj = (ProductController) context.getBean("control");
+ProductService serviceObj = (ProductService) context.getBean("service");
+ProductHelper helperObj = (ProductHelper) context.getBean("helper");
+ProductDAO daoObj = (ProductDAO) context.getBean("dao");
+
+
