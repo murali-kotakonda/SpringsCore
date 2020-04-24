@@ -9,7 +9,7 @@ problems of JDBC API
 - lot of code before and after executing
  the query, such as creating connection,
   statement, closing resultset, connection etc.
-- exception handling code on the database logic.
+- exception handling is mandatory on the database logic.
 - handle transaction.
 - boiler plate code
 - we need statement + connection obj + resultset obj + Callablestatement etc...
@@ -23,7 +23,8 @@ e.g. release the database connections.
 -JDBC template converts also the vendor 
  specific error messages into 
  better understandable error messages.
-
+ - need only the jdbctemplate obj
+ -exception handling is optional
 
 
 TABLE: EmployeeInfo 
@@ -31,24 +32,33 @@ COLUMNS: ID, NAME, SALARYINFO
 
 
 
-
 Java setup:
 -----------
 1.create java project
-2.download the jars for springs core + di + jdbc
+2.download and import  jars for springs core + di + jdbc
+or add maven dependency
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>
+
 3.provide springs.xml
-4.Create a pojo class 
-5.Provide EmployeeDAO.java  -> spring jdbc related code
+4.Create a pojo class  for the EmployeeInfo
+5.Provide EmployeeDAO.java -> spring jdbc related code
+
+
 
 
 EmployeeDao   -> JdbcTemplate -> DataSource -> db properties.
  
+
 We need to write bean tags for EmployeeDao +  JdbcTemplate  +  DataSource 
  
--> for Create /update/read/delete db operations we need only jdbcTemplate object
- 
-  create/update/delete queries   --> update()
-  read  --> query()
+create/update/delete queries   --> JdbcTemplateObj.update("<query>","<data to the query>")
+read  -->  JdbcTemplateObj.query("<query>","<data to the query>",<rowmapper obj or resultset extractor obj>)   
+
 
 Read:
 --------
