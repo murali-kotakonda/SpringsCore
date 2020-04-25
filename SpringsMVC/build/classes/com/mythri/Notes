@@ -1,0 +1,63 @@
+request1.jsp
+------------
+
+
+<a href="/employee">Click here</a>                   -----------> m1()
+
+
+request2.jsp
+------------
+<form action="/employee" method="Get"/>
+<input type="submit"> name="submit" value="submit">    ------->  m1()
+</form>
+
+
+request3.jsp
+------------
+<form action="/employee" method="POST"/>
+<input type="submit"> name="submit" value="submit">  ------> m2()
+</form>
+
+
+request4.jsp
+------------
+<form action="/employee" method="PUT"/>
+<input type="submit"> name="submit" value="submit">-----------> m3()
+</form>
+
+
+request5.jsp
+------------
+<form action="/employee" method="Delete"/>
+<input type="submit"> name="submit" value="submit"> ------------> m4()
+</form>
+
+
+
+
+@Controller
+public class MyController {
+
+
+  @RequestMapping(value="/employee" , method= RequestMethod.GET )
+  public ModelAndView m1(){
+    
+  }
+  
+  @RequestMapping(value="/employee" , method= RequestMethod.POST )
+  public ModelAndView m2(){
+    
+  }
+  
+  
+  @RequestMapping(value="/employee" , method= RequestMethod.PUT )
+  public ModelAndView m3(){
+    
+  }
+  
+  @RequestMapping(value="/employee" , method= RequestMethod.DELETE )
+  public ModelAndView m4(){
+    
+  }
+   
+}

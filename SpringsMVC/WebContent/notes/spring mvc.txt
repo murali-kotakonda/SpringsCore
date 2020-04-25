@@ -1,0 +1,23 @@
+Spring MVC tutorial provides an elegant solution to use MVC in spring framework by the help of DispatcherServlet.
+
+In Spring Web MVC, 
+DispatcherServlet class works as the front controller. 
+It is responsible to manage the flow of the spring mvc application.
+
+The @Controller annotation is used to mark the class as the controller in Spring 3.
+
+The @RequestMapping annotation is used to map the request url. It is applied on the method.
+
+
+
+Spring Web MVC Framework Example
+
+Let's see the simple example of spring web MVC framework. There are given 7 steps for creating the spring MVC application. The steps are as follows:
+
+Create the request page (optional)
+Create the controller class
+Provide the entry of controller in the web.xml file
+Define the bean in the xml file
+Display the message in the JSP page
+Load the spring core and mvc jar files
+Start server and deploy the project
