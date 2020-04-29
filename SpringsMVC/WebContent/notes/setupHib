@@ -1,0 +1,281 @@
+1.Create dynamic web project
+2.import the spring mvc jars and keep jar files under the lib folder
++
+add to java build path (eclipse)
++
+add to deployment assembly (eclipse)
+3. add web.xml under  WEB-INF folder
+4. add <servlet> for Dispatcher Servlet under web.xml
+any request to the backend  will come via this class
+5.add springs.xml under WEB-INF folder
+
+
+
+
+
+
+
+
+
+difference:
+-------------
+JSP stands for Java Server Page
+
+
+JSP:
+JSP stands for Java Server Page
+IN JSP WE CAN WRITE THE html tags
+jsp  -> dynamic , can fetch the data from backend and displays
+      -> html tags
+      -> java code
+      -> springs tags 
+html -> static 
+      -> only html tags
+
+JSP is a technology that helps software developers to 
+create dynamically generated web pages based on HTML. HTML is a standard markup language for creating web pages and web applications. \
+Thus, this is the main difference between JSP and HTML. 
+
+JSP pages add server-side code to an HTML page.
+JSP creates dynamic pages, while HTML creates static pages.
+HTML pages provide emphasis on appearance, semantics and layout of the Information in the browser. JSP pages can invoke built-in functionality from the server.
+HTML runs in the Web Browser. JSP runs directly on the Web Server and local JVM.
+HTML provides a means to describe the structure of text-based information in a document. JSP provides a dynamic interface for continuously changing data and dynamically invokes server actions.
+HTML loads faster as it runs on the local machine. JSP takes some time to load as it has to interact with Web Server.
+
+
+
+
+1.link      -> <a href="url here">Link</a>
+2.button   -> 
+  <form acurl heretion="url here">
+  
+  <input typr ="submit" name="submit" value="register">
+  </form>
+  
+for every actrion pon the page  we have the url:
+
+ex: 
+
+http://localhost:8080/MyApp           -> base url
+http://localhost:8080/MyApp/comments  > resouce url: /comments 
+http://localhost:8080/MyApp/Post     -> > resouce url: /Post
+http://localhost:8080/MyApp/friends   > resouce url: /friends
+http://localhost:8080/MyApp/pages     > resouce url: /pages
+http://localhost:8080/MyApp/groups     > resouce url: /groups
+
+
+http:-> protocol
+localhost: -> the ip address where the application is running.
+8080 -> its the portnumber of the webserver; port number specifies the service.
+    wenbserver runs multiple apps within the same portno:
+			ex:
+			http://localhost:8080/MyApp   
+			http://localhost:8080/youtube
+			http://localhost:8080/gmail
+
+MyApp -> its the applciation name.
+resouce url -> specfies the action to be perfomed by the applciation.
+  
+
+once the app is deployed to the live then 
+http://123.232.11.2:8080/youtube  ======> www.youtube.com
+
+client will access the app using url "www.youtube.com".
+www.youtube.com is internaly mapped with "https://123.232.11.2:8080/youtube"
+here www.youtube.com is "Domain Name"
+DNS -> Domain Naming Server will take care of converting domain names to the Base_URL
+
+
+
+  
+when the client makes a cal to the backend , client has to specify 
+1.<base_url>/ResouceUrl  
+2.Http method  (Specifies the resaon for making call) -> GET, POST, PUT, DELETE  etc...
+
+  URL                            											HTTP_METHOD                            comment
+  http://localhost:8080/MyApp/Employee							    POST																	create the emp 
+  http://localhost:8080/MyApp/Employee							    PUT																	  update the emp 
+  http://localhost:8080/MyApp/Employee							    GET																	  read the emp 
+  http://localhost:8080/MyApp/Employee							    DELETE																delete the emp 
+  
+-> the combination of URL + HTTP_method should be unique.
+  If client doesnt not specifies the URL proper  ---> page not found 404 is reported
+  If client doesnt not specifies the http method --->  by  default it is considered as "GET".
+ 
+  
+1.  All the Link calls the HTTP_METHOD is always GET.
+ ex:   
+ <a href="register">clcik here</a> the href attribute contains either "resouce_url" or any external link or any html/jsp page name
+ here URL :  http://localhost:8080/MyApp/register
+      HTTP_method : GET
+   
+2.  For a button click the htt_method can be GET OR POST OR Delete or PUT
+    ex1:     <form action="search" method ="post">
+  
+									  <input type ="submit" name="submit" value="register">
+ 						 </form>
+  				here URL :  http://localhost:8080/MyApp/search
+     			HTTP_method : post
+          
+    ex2:
+						<form action="search">
+  
+									  <input type ="submit" name="submit" value="register">
+ 						 </form>
+  				here URL :  http://localhost:8080/MyApp/search
+     			HTTP_method : GET
+          
+    ex3:
+						<form action="search" method ="GET" >
+  
+									  <input type ="submit" name="submit" value="register">
+ 						 </form>
+  				here URL :  http://localhost:8080/MyApp/search
+     			HTTP_method : GET
+
+			ex4:
+						<form action="search" method ="DELETE" >
+  
+									  <input type ="submit" name="submit" value="register">
+ 						 </form>
+  				here URL :  http://localhost:8080/MyApp/search
+     			HTTP_method : DELETE
+
+-> in springs mvc the developer has to write one method inside the controller class for every combination of URL + HTTP_method.
+
+  
+>when client clicks on the link or button then in the backend a java method inside the Controller class is called.
+  
+  
+  
+syntax:
+-----------
+The @Controller annotation is used to mark the class as the controller in Spring 
+
+The @RequestMapping annotation is used to map the request url. It is applied on the method.
+
+ex:
+http://localhost:8080/MyApp/Employee							    POST																	create the emp 
+http://localhost:8080/MyApp/Employee							    PUT																	  update the emp 
+http://localhost:8080/MyApp/Employee							    GET																	  read the emp 
+http://localhost:8080/MyApp/Employee							    DELETE																delete the emp 
+
+ write one method inside the controller class for every combination of URL + HTTP_method
+ 
+-> Every controller method should have  @RequestMapping anotation with 
+   value=""    -> specifies the resource url 
+   method=""   -> sepcifies the http method
+-> Every controller method returns   ModelAndView object.
+   ModelAndViewobj -> contains the response jsp page name + response data 
+   
+
+EX1:
+
+   
+@Controller  
+public class MyController { 
+  
+  @RequestMapping(value = "/Employee", method = RequestMethod.POST)
+	public ModelAndView empPOST() {
+		ModelAndView model = new ModelAndView();
+		return model;
+	}
+  
+   @RequestMapping(value = "/Employee", method = RequestMethod.PUT)
+	public ModelAndView empPUT() {
+		ModelAndView model = new ModelAndView();
+
+		return model;
+	}
+  
+  
+   @RequestMapping(value = "/Employee", method = RequestMethod.GET)
+	public ModelAndView empGET() {
+		ModelAndView model = new ModelAndView();
+	 
+		return model;
+	}
+  
+  
+   @RequestMapping(value = "/Employee", method = RequestMethod.DELETE)
+	public ModelAndView empDELETE() {
+		ModelAndView model = new ModelAndView();
+	 
+
+		return model;
+	}
+}
+
+
+
+
+
+
+EX2: 
+  
+request1.jsp
+------------
+
+
+<a href="/search">Click here</a>                   -----------> m1()
+
+
+request2.jsp
+------------
+<form action="/search" method="Get"/>
+<input type="submit"> name="submit" value="submit">    ------->  m1()
+</form>
+
+
+request3.jsp
+------------
+<form action="/search" method="POST"/>
+<input type="submit"> name="submit" value="submit">  ------> m2()
+</form>
+
+
+request4.jsp
+------------
+<form action="/search" method="PUT"/>
+<input type="submit"> name="submit" value="submit">-----------> m3()
+</form>
+
+
+request5.jsp
+------------
+<form action="/search" method="Delete"/>
+<input type="submit"> name="submit" value="submit"> ------------> m4()
+</form>
+
+
+
+
+@Controller
+public class MyController {
+
+
+  @RequestMapping(value="/search" , method= RequestMethod.GET )
+  public ModelAndView m1(){
+    
+  }
+  
+  @RequestMapping(value="/search" , method= RequestMethod.POST )
+  public ModelAndView m2(){
+    
+  }
+  
+  
+  @RequestMapping(value="/search" , method= RequestMethod.PUT )
+  public ModelAndView m3(){
+    
+  }
+  
+  @RequestMapping(value="/search" , method= RequestMethod.DELETE )
+  public ModelAndView m4(){
+    
+  }
+   
+}
+  
+  

@@ -4,11 +4,6 @@ In Spring Web MVC,
 DispatcherServlet class works as the front controller. 
 It is responsible to manage the flow of the spring mvc application.
 
-The @Controller annotation is used to mark the class as the controller in Spring 3.
-
-The @RequestMapping annotation is used to map the request url. It is applied on the method.
-
-
 
 Spring Web MVC Framework Example
 

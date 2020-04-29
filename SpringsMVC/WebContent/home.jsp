@@ -16,6 +16,8 @@
 <a href="helloWithMultiData3">get Hello multi data3</a>&nbsp;
 <a href="helloWithObject">get Obj</a>&nbsp;&nbsp;&nbsp;
 <a href="empWithAddress">empWithAddress</a>&nbsp;&nbsp;&nbsp;
+
+<a href="check">Check</a>&nbsp;&nbsp;&nbsp;
 <a href="strList">get String List</a>&nbsp;&nbsp;&nbsp;
 <a href="empList">get Emp List</a>&nbsp;&nbsp;&nbsp;
 <a href="registerGet.jsp">register Emp [GET]</a>&nbsp;&nbsp;&nbsp;

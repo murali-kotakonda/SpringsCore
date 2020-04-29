@@ -22,6 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mnp.dto.Address;
 import com.mnp.dto.Employee;
 
+/**
+ * @author APSTEP
+ *
+ */
 @Controller
 public class MyController {
 	
@@ -34,17 +38,31 @@ public class MyController {
 	}*/
 	
 	//or
+	/**
+			1.client clicks of a link and make a backend call.
+			link : /hello
+	 * @return
+	 */
 	@RequestMapping(value="/hello" , method= RequestMethod.GET )
 	public ModelAndView showPage1(){
-		return new ModelAndView("welcome");
+		return new ModelAndView("welcome");//here welcome.jsp is the response page
 	}
 	
-	@RequestMapping(value = "/helloWithData", method = RequestMethod.GET)
+
+	/**
+	 * @return
+	 * 
+	 * addObject take two paarams :
+1st param : string
+2nd param : can be any data type 
+	 */
+	@RequestMapping(value = "/helloWithData", method = RequestMethod.GET) // resouce url = helloWithData , method = GET
 	public ModelAndView getHello() {
-		ModelAndView response = new ModelAndView("response");
-		response.addObject("message", "hi from backend.. ..");
+		ModelAndView response = new ModelAndView("response"); // here response.jsp is the resoonse page name
+		response.addObject("message", "hi from backend.. .."); // response data sent to the response.jsp page.
 		return response;
 	}
+	
 
 	@RequestMapping(value = "/helloWithMultiData1",method = RequestMethod.GET)
 	public ModelAndView getMultiData() {
@@ -78,14 +96,14 @@ public class MyController {
 		return new ModelAndView("response", map);
 	}
 	
-	@RequestMapping(value = "/helloWithObject", method = RequestMethod.GET)
-	public ModelAndView sendObj() {
-		ModelAndView modelAndView = new ModelAndView("empResponse");
-		Employee employee = new Employee(23, 12121, "user1", "shyam", 13131313);
-		modelAndView.addObject("message", "process successful...");
-		modelAndView.addObject("emp", employee);
-		return modelAndView;
-	}
+	 @RequestMapping(value = "/helloWithObject", method = RequestMethod.GET)
+		public ModelAndView sendObj() {
+			ModelAndView modelAndView = new ModelAndView("empResponse"); // here empResponse.jsp is the response page
+			Employee employee = new Employee(23, 12121, "user1", "shyam", 13131313);
+			modelAndView.addObject("message", "process successful...");
+			modelAndView.addObject("emp", employee); // we are sending employee obj + string to the response page.
+			return modelAndView;
+		}
 	
 	@RequestMapping(value = "/empWithAddress", method = RequestMethod.GET)
 	public ModelAndView empWithAddress() {
@@ -95,6 +113,14 @@ public class MyController {
 		e1.setAddress(address);
 		modelAndView.addObject("message", "message from helloWithMultiData");
 		modelAndView.addObject("emp", e1);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public ModelAndView check() {
+		ModelAndView modelAndView = new ModelAndView("checkResponse");
+		modelAndView.addObject("age", 15);
+		modelAndView.addObject("name", "");
 		return modelAndView;
 	}
 	
