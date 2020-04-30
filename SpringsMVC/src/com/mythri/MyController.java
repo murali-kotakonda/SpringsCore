@@ -156,28 +156,36 @@ public class MyController {
  3. Customer will fill the data in the form and clicks on submit button
  4. In the resonse page show the data submitted by customer.
   
+ 
+-> every Field in the request page  should have a name.
   For capturing the input from the web page , we need to write new annotation
-  
-  @RequestParam("uName") String userName,
+   @RequestParam("uName") String userName,
   @RequestParam("age") int age,
   @RequestParam("sal") float mysal,
+
+the Field name in the jsp should be used for the  @RequestParam annotation.
   
-   // every input from the wbe page is the input argument to the controller method.
+   // every input from the web page is the input argument to the controller method.
 	
- 
+when we click on submit buton:
+Resource url : /register
+HTTP Mrethod : GET
  * */
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView registerGet(
 			@RequestParam("uName") String userName,
 			@RequestParam("age") int age, 
 			@RequestParam("sal") float sal) {
+		// the Field name in the jsp SHOULD be used for the  @RequestParam annotation.
+		// every input from the web page is the input argument to the controller method.
 		String resData = "Request Data : name= " + userName + " , age = " + age + ", sal =" + sal;
-		return new ModelAndView("readDetails", "myData", resData);
+		return new ModelAndView("readDetails", "myData", resData);   //readDetails.jsp is the response page and resData is the response data to the jsp
 	}
-	/*
-	  
-	 For a GET Call, the data submitted by the customer is appended to the url and is visible in the URL.
-inputdata is part of request URL.
+
+/*
+For a GET Call, the data submitted by the customer is appended to the url and is visible in the URL.
+input data is part of request URL.
   
 EX: 
 http:/localhost:7189/SpringsMVC2/register?uName=Ramesh&age=25&sal=48000&submit=submit
@@ -185,18 +193,19 @@ Base_url + resource_url + Query params [ after ? what ever that comes ]
 Query Param  Names are : uName , age and sal
 Every query param is seperated by  & 
 For generic data submission use GET call.
-Cannot handle large data.  
+CANNOT USE FOR SENSITIVE DATA SUBMISISON.
+Cannot handle large data. 
   
 
 
 For a  post call, the data submitted by customer is not appended to URL , 
-inputdata is part of request body.
+input data is part of request body.
 EX: http:/localhost:7189/SpringsMVC2/register
 For secure data transfer use POST call. 
 Can handle large data.
 File uploads/image  upoad should be done using post calls.
   
- */            
+*/            
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView registerPost(
 			@RequestParam("uName") String userName,
