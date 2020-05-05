@@ -16,7 +16,10 @@ import com.mythri.bean.EmployeeBean;
 import com.mythri.model.Employee;
 import com.mythri.service.EmployeeService;
 
+@Controller
 public class EmployeeController {
+	
+	private List<Employee> list;
 	
 	private EmployeeService employeeService;
 	
@@ -24,7 +27,8 @@ public class EmployeeController {
 	public ModelAndView saveEmployee(@ModelAttribute("command") EmployeeBean employeeBean, 
 			BindingResult result) {
 		Employee employee = prepareModel(employeeBean);
-		employeeService.addEmployee(employee);
+		//employeeService.addEmployee(employee);
+		list.add(employee);
 		return new ModelAndView("redirect:/add.html");
 	}
 
@@ -32,7 +36,7 @@ public class EmployeeController {
 	public ModelAndView listEmployees() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		//model.put("employees",  prepareListofBean(employeeService.listEmployeess()));
-		model.put("employees",  new ArrayList<Employee>());
+		model.put("employees",  list);
 		return new ModelAndView("employeesList", model);
 	}
 
@@ -41,7 +45,7 @@ public class EmployeeController {
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		//model.put("employees",  prepareListofBean(employeeService.listEmployeess()));
-		model.put("employees",  new ArrayList<Employee>());
+		model.put("employees",  list);
 		return new ModelAndView("addEmployee", model);
 	}
 	
@@ -56,16 +60,27 @@ public class EmployeeController {
 		employeeService.deleteEmployee(prepareModel(employeeBean));
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("employee", null);
-		model.put("employees",  prepareListofBean(employeeService.listEmployeess()));
+		for(Employee e: list) {
+			if(e.getEmpId().equals(employeeBean.getId())) {
+				list.remove(e);
+			}
+		}
+		model.put("employees",  prepareListofBean(list));
 		return new ModelAndView("addEmployee", model);
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView deleteEmployee(@ModelAttribute("command")  EmployeeBean employeeBean,
 			BindingResult result) {
+		Employee emp = null;
+		for(Employee e: list) {
+			if(e.getEmpId().equals(employeeBean.getId())) {
+				emp = e;
+			}
+		}
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("employee", prepareEmployeeBean(employeeService.getEmployee(employeeBean.getId())));
-		model.put("employees",  prepareListofBean(employeeService.listEmployeess()));
+		model.put("employee", prepareEmployeeBean(emp));
+		model.put("employees", list);
 		return new ModelAndView("addEmployee", model);
 	}
 	

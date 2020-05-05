@@ -3,16 +3,16 @@ package com.mythri;
 import java.util.List;
 
 public class UserInfo {
-	private String firstname;
-	private String lastname;
-	private String email;
-	private String telephone;
-	private Integer age;
-	private String city;
-	
-	private String gender;
-	private List<String> idProofs;
-	private String  address;
+	private String firstname;    //	<form:input path="firstname" /> 
+	private String lastname;   //	<form:input path="lastname" />
+	private String email;   //	<form:input path="email" />
+	private String telephone;   //	<form:input path="telephone" />
+	private Integer age;   //	<form:input path="age" />
+	private String city;    //	<form:input path="city" />
+	  
+	private String gender;   //
+	private List<String> idProofs;  //
+	private String  address;  //
 	
 	public String getAddress() {
 		return address;

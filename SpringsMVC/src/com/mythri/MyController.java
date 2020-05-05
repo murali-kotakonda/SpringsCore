@@ -195,7 +195,6 @@ Every query param is seperated by  &
 For generic data submission use GET call.
 CANNOT USE FOR SENSITIVE DATA SUBMISISON.
 Cannot handle large data. 
-  
 
 
 For a  post call, the data submitted by customer is not appended to URL , 
@@ -204,7 +203,6 @@ EX: http:/localhost:7189/SpringsMVC2/register
 For secure data transfer use POST call. 
 Can handle large data.
 File uploads/image  upoad should be done using post calls.
-  
 */            
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView registerPost(
@@ -215,6 +213,16 @@ File uploads/image  upoad should be done using post calls.
 		return new ModelAndView("readDetails", "myData", resData);
 	}
 	
+	/**
+	 * @param userName
+	 * @param password
+	 * @return
+	 * 
+	 1.Request page has username and password , submit button
+		2. customer will enter the usernam and password and clcks on submit button.
+		3.  - if username value ="admin" and password ="admin" then show "Login success"
+      else show "Login failure"
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView checkLogin(
 			@RequestParam("userName") String userName,
@@ -271,136 +279,190 @@ File uploads/image  upoad should be done using post calls.
 		}
 	}
 
-/*
-register.jsp
--------------
-A Form to contain  -> Id , firstname , lastname , password , age as inputs + Register button
+	 @RequestMapping(value = "/registerform", method = RequestMethod.GET)	
+	 public ModelAndView showRegister() {
+		 return new ModelAndView("register");
+	 }
+		 
+	/*
+	register.jsp
+	-------------
+	A Form to contain  -> Id , firstName , lastName , password , age as inputs + Register button
+	
+	Controller method backend:
+	----------------------------------------------------------------------
+	-> Validation 
+	- ID should start with C_ OR P_     [Invalid Id]
+	- firstName should be min 10 chars
+	- last name should be min 8 chars
+	- password should be betwen 10 to 15 , spaces are not allowed  , 
+	- age should be between 18 & 60
+	
+	If validation is success then do the registration and show response using show success.jsp  -> Registration succes
+	If validation is failed then show register.jsp -> Registration failure message + what exactly is wrong + Retain the input data
+	
+	//when input data is invalid then
+	//carry the error message and the object to the response page
+		message -> to disply so that customer can underatand the error
+		object  -> to retain the data.
+	* */
+	 
 
 
-Controller method: backend:
-----------------------------------------------------------------------
--> Validation 
-- ID should start with C_ OR P_     [Invalid Id]
-- firstName should be min 10 chars
-- last name should be min 8 chars
-- passord shouldbe betwen 10 to 15 , spaces are not allowed  , 
-- age should be betwene 18 & 60
-  
+@RequestMapping(value = "/registerform", method = RequestMethod.POST)
+	public ModelAndView registerValidation(@RequestParam("ID") String id, @RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("age") int age,
+			@RequestParam("password") String password) {
+    
+    //keep request data inside the object
+		RegisterForm registerObj = new RegisterForm();
+		registerObj.setAge(age);
+		registerObj.setId(id);
+		registerObj.setFirstName(firstName);
+		registerObj.setLastName(lastName);
+		registerObj.setPassword(password);
 
-If validation is success then show success.jsp  -> Registration succes
-If validation is failed then show register.jsp -> Registration failure message + what exactly is wrong + Retain the input data
-
-* */
-	  @RequestMapping(value = "/registerform", method = RequestMethod.POST)
-		public ModelAndView registerValidation(@RequestParam("ID") String id, @RequestParam("firstName") String firstName,
-				@RequestParam("lastName") String lastName, @RequestParam("age") int age,
-				@RequestParam("password") String password) {
-			RegisterForm registerObj = new RegisterForm();
-			registerObj.setAge(age);
-			registerObj.setId(id);
-			registerObj.setFirstName(firstName);
-			registerObj.setLastName(lastName);
-			registerObj.setPassword(password);
-			
-			if(!(id.startsWith("C_")||id.startsWith("P_"))) {
-				ModelAndView response = new ModelAndView("register");
-				response.addObject("msg","id should start with C_ or P_");
-				response.addObject("form",registerObj);
-				return response;
-			}
-			if ((firstName.length() < 10)) {
-				ModelAndView response = new ModelAndView("register");
-				response.addObject("msg", "firstName should be min 10 characters");
-				response.addObject("form", registerObj);
-
-				return response;
-			}
-			if ((lastName.length() < 8)) {
-				ModelAndView response = new ModelAndView("register");
-				response.addObject("msg", "lastName should be min 8 characters");
-				response.addObject("form", registerObj);
-
-				return response;
-			}
-
-			if (password.length() < 10 || password.contains(" ") || password.length() > 15) {
-				ModelAndView response = new ModelAndView("register");
-				response.addObject("msg", "password should be min 10, max 15 characters and space not allowed");
-				response.addObject("form", registerObj);
-
-				return response;
-			}
-			if (age < 18 || age > 60) {
-				ModelAndView response = new ModelAndView("register");
-				response.addObject("msg", "age should be min 18, max 60");
-				response.addObject("form", registerObj);
-
-				return response;
-			}
-
-			ModelAndView response = new ModelAndView("successRegister");
-			response.addObject("msg", "registration success");
+    //if id is invalid then return  message and object
+		if (!(id.startsWith("C_") || id.startsWith("P_"))) {
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("msg", "id should start with C_ or P_");
+			response.addObject("form", registerObj);
 			return response;
-
 		}
+    
+    //if firstName is invalid then return  message and object
+		if ((firstName.length() < 10)) {
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("msg", "firstName should be min 10 characters");
+			response.addObject("form", registerObj);
+
+			return response;
+		}
+  
+  //if lastName is invalid then return  message and object
+		if ((lastName.length() < 8)) {
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("msg", "lastName should be min 8 characters");
+			response.addObject("form", registerObj);
+
+			return response;
+		}
+
+  //if password is invalid then return message and object
+		if (password.length() < 10 || password.contains(" ") || password.length() > 15) {
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("msg", "password should be min 10, max 15 characters and space not allowed");
+			response.addObject("form", registerObj);
+
+			return response;
+		}
+  
+    //if age is invalid then return  message and object
+		if (age < 18 || age > 60) {
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("msg", "age should be min 18, max 60");
+			response.addObject("form", registerObj);
+
+			return response;
+		}
+
+  //if all input data si valid then return the success msg to the success page
+		ModelAndView response = new ModelAndView("successRegister");
+		response.addObject("msg", "registration success");
+		return response;
+
+	}
 	  // send multi errors on above prog.
 	  //try to move the validation logic to service class.
 	  
-	  
-	  //showa all error msgs
-	  @RequestMapping(value = "/registerform1", method = RequestMethod.POST)
-		public ModelAndView registerValidation1(@RequestParam("ID") String id, @RequestParam("firstName") String firstName,
-				@RequestParam("lastName") String lastName, @RequestParam("age") int age,
-				@RequestParam("password") String password) {
-			RegisterForm registerObj = new RegisterForm();
-			registerObj.setAge(age);
-			registerObj.setId(id);
-			registerObj.setFirstName(firstName);
-			registerObj.setLastName(lastName);
-			registerObj.setPassword(password);
-			
-			 List<String> list = validate(registerObj);
+	  //show all error msgs
 
-				if(list.isEmpty()) {
-				ModelAndView response = new ModelAndView("successRegister");
-				response.addObject("msg", "registration success");
-				return response;
-				}
-				else {
-					ModelAndView response = new ModelAndView("register");
-					response.addObject("form", registerObj);
-					response.addObject("msgs",list);
-					return response;
-				}
-				
+
+@RequestMapping(value = "/registerform1", method = RequestMethod.POST)
+	public ModelAndView registerValidation1(@RequestParam("ID") String id, @RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("age") int age,
+			@RequestParam("password") String password) {
+    //keep the request data inside fthe obj
+		RegisterForm registerObj = new RegisterForm();
+		registerObj.setAge(age);
+		registerObj.setId(id);
+		registerObj.setFirstName(firstName);
+		registerObj.setLastName(lastName);
+		registerObj.setPassword(password);
+
+    //get the list of error message
+		List<String> list = validate(registerObj);
+
+		if (list.isEmpty()) {
+      //no errror found
+			ModelAndView response = new ModelAndView("successRegister");
+			response.addObject("msg", "registration success");
+			return response;
+		} else {
+      //send error mss + obj to the response page
+			ModelAndView response = new ModelAndView("register");
+			response.addObject("form1", registerObj);
+			response.addObject("msgs", list);
+			return response;
 		}
+	}
 
 	private List<String> validate(RegisterForm registerObj) {
 		List<String> list = new ArrayList<String>();
-			
-			if (!(registerObj.getId().startsWith("C_") || registerObj.getId().startsWith("P_"))) {
-				list.add("id should start with C_ or P_");
 
-				
-			}
-			if ((registerObj.getFirstName().length() < 10)) {
-				list.add("fistname should contain min 10 characters");
-				
-			}
-			if ((registerObj.getLastName().length() < 8)) {
-				list.add("fistname should contain min 8 characters");
-			}
+		if (!(registerObj.getId().startsWith("C_") || registerObj.getId().startsWith("P_"))) {
+			list.add("id should start with C_ or P_");
 
-			if (registerObj.getPassword().length() < 10 || registerObj.getPassword().contains(" ") || registerObj.getPassword().length() > 15) {
-				list.add("password should be min 10, max 15 characters and space not allowed");
-			}
-			if (registerObj.getAge() < 18 || registerObj.getAge() > 60) {
-				list.add("age should be min 18, max 60");
-			}
+		}
+		if ((registerObj.getFirstName().length() < 10)) {
+			list.add("fistname should contain min 10 characters");
+
+		}
+		if ((registerObj.getLastName().length() < 8)) {
+			list.add("fistname should contain min 8 characters");
+		}
+
+		if (registerObj.getPassword().length() < 10 || registerObj.getPassword().contains(" ")
+				|| registerObj.getPassword().length() > 15) {
+			list.add("password should be min 10, max 15 characters and space not allowed");
+		}
+		if (registerObj.getAge() < 18 || registerObj.getAge() > 60) {
+			list.add("age should be min 18, max 60");
+		}
 		return list;
 	}
 	  
-	  
+	/**
+	 * @param session
+	 * @return
+	 * session tracking:
+
+		Session: 
+		Http is a stateless protocaol.
+		server will not recognize the client.
+		Every request is New.
+		
+		Web apps: 
+		1.we will authnticate one time using login page
+		2.after that cutomer clicks on every link [ he will not provide any auth ]
+		
+		client identification
+		-> sessions
+		
+		Session obj is created seperately for every customer.
+		Session should contain the customer basic info
+		session data is availanble for a long time,.
+		Session obj coantains the cutsomer info.
+		
+		-> how to add session data
+		[if the data is added to the session , then the data is available to all the pages .
+		ex: 
+		 if we add a data to session obj during the login page, then the data is available to all the pages.
+		 until logout or until session is invalidated.
+		]
+		-> how to read the session data
+		-> how to delete the sesion data
+	 */
 	@RequestMapping("/homePage")
 	public ModelAndView homePage(HttpSession session) {
 		String message = "HELLO ";
@@ -408,25 +470,24 @@ If validation is failed then show register.jsp -> Registration failure message +
 	}
 	
 	@RequestMapping(value = "/postSessionData", method = RequestMethod.POST)
-	public ModelAndView postSessionData(
-			@RequestParam("uName") String userName,
-			HttpSession session) {
-		session.setAttribute("myName", userName);
+	public ModelAndView postSessionData(@RequestParam("uName") String userName, HttpSession session) {// get session obj
+		session.setAttribute("myName", userName);// myName is the sesison name
 		return new ModelAndView("hellopage", "userName", userName);
 	}
-	
+	//
+
 	@RequestMapping("/getSessionData")
-	public ModelAndView getSessionData(HttpSession session) {
-		String  userName = (String)session.getAttribute("myName");
-		if(userName==null || userName.isEmpty()) {
+	public ModelAndView getSessionData(HttpSession session) { // get session obj
+		String userName = (String) session.getAttribute("myName"); // get the data inside the session
+		if (userName == null || userName.isEmpty()) {
 			userName = "[ NO DATA IN SESSION... ]";
 		}
 		return new ModelAndView("hellopage", "userName", userName);
 	}
-	
+
 	@RequestMapping("/deleteSessionData")
 	public ModelAndView deleteSessionData(HttpSession session) {
-		session.removeAttribute("myName");
+		session.removeAttribute("myName");// delete the data from session
 		return new ModelAndView("hellopage", "userName", "NO DATA IN SESSION");
 	}
 }
