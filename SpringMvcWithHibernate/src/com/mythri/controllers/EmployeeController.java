@@ -23,6 +23,14 @@ import com.mythri.service.EmployeeService;
 import com.mythri.util.EmployeeNotFoundException;
 import com.mythri.util.UserException;
 
+/**
+ * @author APSTEP
+	EmployeeController has EmployeeService obj as dependency
+	EmployeeService has EmployeeDao as dependency
+	EmployeeDao has SessionFactory as dependency
+	
+	EmployeeController ,EmployeeService , EmployeeDao , SessionFactory objs are created by springs.
+ */
 @Controller
 public class EmployeeController {
 
@@ -45,9 +53,11 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/addEmp", method = RequestMethod.POST)
-	public ModelAndView addEmp(@Valid @ModelAttribute("employee") Employee employee, BindingResult result) {
+	public ModelAndView addEmp(@Valid 
+			@ModelAttribute("employee") 
+			Employee employee, BindingResult result) {
 		if (result.hasErrors()) {
-			String message = getErrorMsg(result);
+			String message = "Error while creating emp";//getErrorMsg(result);
 			ModelAndView model = new ModelAndView("showAddEmp", "command", employee);
 			model.addObject(MSG, message);
 			return model;

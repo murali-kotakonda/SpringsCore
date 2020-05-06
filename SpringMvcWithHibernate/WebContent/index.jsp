@@ -12,6 +12,6 @@
 	<a href="login">Login</a>
 	<br/><br/>
 	
-	<h1>Springs MVC Demo App</h1>
+	<h1>Springs MVC Hibernate Demo App</h1>
 </body>
 </html>
