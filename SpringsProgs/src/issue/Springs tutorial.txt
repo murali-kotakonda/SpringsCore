@@ -33,6 +33,6 @@ ApplicationContext (builds on top of BeanFactory  )-----> creates the objs durin
 IOC container features:
 -----------------------------
 Create objs
-resolev dependecies
+resolve dependecies
 manage life cycle
 
