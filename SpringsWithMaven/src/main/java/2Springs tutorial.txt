@@ -1,0 +1,36 @@
+java frameworks:
+-----------------
+
+--- too complex
+--- heavy weight components
+--- collections of apis to solve specific prblms
+--- Jars
+
+
+adv:
+---------
+efficiency
+security
+expences
+save time and lots of code
+support for faster development
+
+
+dis:
+------
+code is public or opensource
+custom builtin 
+
+IOC:
+-----
+
+BeanFactory ---- > creates the objs when getBean method is called
+ApplicationContext (builds on top of BeanFactory  )-----> creates the objs during the loading i.e. before getBean() method
+
+
+IOC container features:
+-----------------------------
+Create objs
+resolve dependecies
+manage life cycle
+

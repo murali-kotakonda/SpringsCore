@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="aService" 
+	class="constrInject3.AccountService">
+	 	 	<constructor-arg value="Oracle"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="uService" 
+	class="constrInject3.UserService">
+		<constructor-arg value="admin"></constructor-arg>
+		<constructor-arg ref="aService" />
+	</bean>
+
+
+	<bean id="pService" 
+	class="constrInject3.ProductService">
+	 	 <constructor-arg ref="aService" />
+	</bean>
+
+</beans>

@@ -9,4 +9,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	   <constructor-arg value="user@1234"/>
 	</bean> 
 	
+	<bean id="aService" 
+	      class="constrInject1.AccountService">
+	   <constructor-arg value="mysql"/>
+	</bean> 
+	
 </beans>
