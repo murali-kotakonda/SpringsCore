@@ -1,8 +1,5 @@
 package issue;
 
-/**
-  Create obj for ProductController and call the process() method. 
- */
 public class TestProdcuctController {
 	public static void main(String[] args) {
 		ProductController controller = new ProductController();

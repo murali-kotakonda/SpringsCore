@@ -1,0 +1,138 @@
+public class Person{
+  
+  private int id;
+  public Person(){
+    
+  }
+  public Person(int id){
+     this.id= id
+  }
+  public void setId(int id){
+    this.id= id
+  }
+  
+}
+
+Req: create the object and set the data
+
+approach1:(set the data using setter method)
+--------------------------------------------------------
+ Person p1 = new Person();
+p.setId(200);
+
+
+approach2:(set the data  during obj creation using constructor)
+--------------------------------------------------------
+Person p1 = new Person(200);
+ 
+
+
+
+Spring will resolve dependencies  using:
+-----------------------------------
+    -> setter injection
+    -> constr injection
+    
+                                           Java class                                                   Springs.xml
+  --------------------|-----------------------------------------------------------------------------------------------------------------
+  setter injection    |     Need setter methods for all dependencies                     Write property tag under the bean tag.
+                      |  public void setDbName(String dbName) {                           <bean id="aService"  class="setterInject1.AccountService">
+    									|		this.dbName = dbName;						<property name="dbName" value="oracle" />
+    									|		} 										 </bean>
+----------------------|---------------------------------------------------------------------------------------------------------------------  
+  constr injection    |    Need constr that has all dependencies as arguments           Write constructor-arg tag under the bean tag.
+  					  |		public UserService(String userName, String pass) {         <bean id="uService"  class="constrInject1.UserService">
+					  |					this.userName = userName;                                         <constructor-arg value="system"/>
+					  |					this.pass = pass;                                                 <constructor-arg value="user@1234"/>
+					  |				}                                                          </bean>
+  --------------------|----------------------------------------------------------------------------------------------------------------------
+  
+                        
+
+ setter injection :
+ ------------------------------------------------------------------------------------------------
+ 1.Change in java class
+ 2.change in springs.xml
+ 
+ 
+ AccountService.java:
+ -----------------------
+public class AccountService {
+private String dbName;
+
+	public String getDbName() {
+		return dbName;
+	}
+
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+}
+
+the dependency for AccountService is "dbName".
+spring has to create obj for AccountService and spring has to set the data for dbName.
+what data spring should set is decided by developed.
+
+
+ change in Java class :
+ ---------------
+  - Need setter methods for all dependencies
+  ex:
+  	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+  
+  
+  changes in springs.xml:
+  -------------------------------
+  - with bean tag add the property tag
+   <bean id="aService"  class="Ex4.AccountService">
+   		<property name="dbName" value="oracle" />
+   </bean>
+   
+        AccountService aService = new AccountService();
+     aService.setDbName("oracle");
+
+
+ constructor injection :
+ ------------------------------------------------------------------------------------------------
+ 1.Change in java class
+ 2.change in springs.xml
+ 
+
+public class UserService {
+	//credentials
+	String userName;
+	String pass;
+
+	public UserService(String userName, String pass) {
+		this.userName = userName;
+		this.pass = pass;
+	}
+}
+
+
+the dependency for UserService is "userName" and "pass" .
+spring has to create obj for UserService and spring has to set the data for "userName" and "pass".
+what data spring should set is decided by developer.
+
+
+ change in Java class :
+ ---------------
+  -  Need constructor that has all dependencies as arguments  
+  ex:
+  	public UserService(String userName, String pass) {
+		this.userName = userName;
+		this.pass = pass;
+	}
+  
+  
+  changes in springs.xml:
+  -------------------------------
+  - Write constructor-arg tag under the bean tag for every dependency.
+   <bean id="uService"  class="constrInject1.UserService">
+      <constructor-arg value="system"/>
+       <constructor-arg value="user@1234"/>
+    </bean>
+    
+    UserService uService = new UserService("system", "user@1234");
