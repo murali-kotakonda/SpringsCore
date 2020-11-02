@@ -3,15 +3,18 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
-	<bean id="uService" 
-	      class="constrInject1.UserService">
+ 	<bean id="aService" 
+	      class="Ex4ConstrInject.AccountService">
+	   <constructor-arg value="mysql"/>
+	</bean> 
+	
+	<!-- spring create the obj for AccountService and set the "mysql" for dbName. -->
+	
+	<bean id="uService" class="Ex4ConstrInject.UserService">
 	   <constructor-arg value="system"/>
 	   <constructor-arg value="user@1234"/>
 	</bean> 
 	
-	<bean id="aService" 
-	      class="constrInject1.AccountService">
-	   <constructor-arg value="mysql"/>
-	</bean> 
+	<!--  spring create the obj for UserService and set the "system" for userName and "user@1234" for pass. -->
 	
 </beans>

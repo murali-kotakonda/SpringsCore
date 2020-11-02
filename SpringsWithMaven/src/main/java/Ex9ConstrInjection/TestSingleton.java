@@ -1,4 +1,4 @@
-package Ex9constrInjectMap;
+package Ex9ConstrInjection;
 
 public class TestSingleton {
 	public static void main(String[] args) {

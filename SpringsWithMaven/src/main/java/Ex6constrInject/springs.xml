@@ -4,21 +4,31 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="aService" 
-	class="constrInject3.AccountService">
+	class="Ex6constrInject.AccountService">
 	 	 	<constructor-arg value="Oracle"></constructor-arg>
 	</bean>
+	<!-- spring create the obj for AccountService and set the "Oracle" for dbName. -->
 	
 	
 	<bean id="uService" 
-	class="constrInject3.UserService">
+	class="Ex6constrInject.UserService">
 		<constructor-arg value="admin"></constructor-arg>
 		<constructor-arg ref="aService" />
 	</bean>
 
 
+ <!-- spring create the obj for UserService and set the "admin" for userName and 
+       " aService" for accountService.
+  -->
 	<bean id="pService" 
-	class="constrInject3.ProductService">
+	class="Ex6constrInject.ProductService">
 	 	 <constructor-arg ref="aService" />
 	</bean>
+	
+	  <!-- spring create the obj for ProductService and set the " aService" for accountService.   -->
 
+		<!--  For resolving obj as dependency 
+       use   ref attribute along with <constructor-arg> tag
+	 -->
+	 
 </beans>

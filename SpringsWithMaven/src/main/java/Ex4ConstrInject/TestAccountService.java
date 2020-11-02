@@ -6,10 +6,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestAccountService {
 
 	public static void main(String[] args) {
+		// get context obj
 		ApplicationContext context = 
 				new ClassPathXmlApplicationContext
-				("file:src/constrInject1/springs.xml");
+				("file:src/main/java/Ex4constrInject/springs.xml");
 		 
+		// get AccountService from springs
 		AccountService acc = (AccountService)
 				context.getBean("aService");
 		acc.connect();

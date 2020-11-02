@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="uService" 
-		class="constrInject4list.UserService">
+	<bean id="uService" class="Ex7constrInjectlist.UserService">
 		<constructor-arg value="admin" ></constructor-arg>
+		
 		<constructor-arg>
 			<list>
 				<value>testsys1</value>
@@ -16,5 +16,27 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<value>live</value>
 			</list>
 		</constructor-arg>
+		
 	</bean>
+	
+	  <!--  For resolving list as dependency 
+       use  <list> tag with multiple <value> tags.
+	 -->
+	
+	<!-- spring create the obj for UserService and set the "admin" for userName.
+	      Springs creates a list and adds the srings  "testsys1" , "testsys2"  ,"sandbox" ,  "dbsys" , "live"
+	      to the list.
+	      
+	      Springs will set the list for "envs" inside the  UserService obj. 
+	      
+        Lis<String> envs = new ArrayList<>();
+        envs.add("testsys1");
+        envs.add("testsys2");
+	    envs.add("sandbox");
+        envs.add("testsys1");
+        envs.add("dbsys");
+        envs.add("live");
+   
+	 -->
+	
 </beans>

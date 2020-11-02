@@ -34,7 +34,6 @@ public class TestProductServiceWithSprings {
 		product.setBrand("lifestyle");
 		product.setProductName("shirt merun");
 		
-		
 		// spring will create obj , dev has to get obj from springs
 
 		// get context obj

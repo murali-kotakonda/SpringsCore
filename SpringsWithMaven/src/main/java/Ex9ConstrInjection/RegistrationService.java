@@ -1,8 +1,14 @@
-package Ex9constrInjectMap;
+package Ex9ConstrInjection;
 
 import java.util.Map;
 import java.util.Map.Entry;
-
+/**
+RegistrationService is a bean class.
+RegistrationService has "props"(map) as dependency.
+spring has to create the obj for RegistrationService and set the data for "props"(map) as dependency..
+since we are using constr injection we need to write the constructor in RegistrationService
+and write bean tag with one constructor-arg tags in springs.xml.
+ */
 public class RegistrationService {
 
 	Map<String, String> props;
