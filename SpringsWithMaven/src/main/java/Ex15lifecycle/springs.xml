@@ -3,12 +3,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="aService" 
-	class="lifecycle.AccountService" 
-	init-method="myInit" 
-	destroy-method="myClose" scope="prototype">
+	<bean id="aService" class="Ex15lifecycle.AccountService"  init-method="myInit" destroy-method="myClose" scope="singleton">
 		<property name="dbName" value="SQLserver" />
 	</bean>
-
-
 </beans>
+
+<!-- destroy-method="myClose" scope="prototype"> -->

@@ -3,17 +3,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="aService" 
-	class="lifecycle3.AccountService">
+
+	<bean id="pService" class="Ex17lifecycle.ProductService" />
+
+	<bean id="cService" class="Ex17lifecycle.CustomerService" />
+
+	<bean id="bService" class="Ex17lifecycle.MyBeanPostProcessor" />
+	
+	<bean id="aService" class="Ex17lifecycle.AccountService">
 		<property name="dbName" value="SQLserver" />
 		<property name="dbName1" value="oracle" />
 	</bean>
-
-	<bean id="pService" 
-	class="lifecycle3.ProductService" />
-
-	<bean id="bService" 
-	class="lifecycle3.MyBeanPostProcessor" 
-	/> 
 
 </beans>

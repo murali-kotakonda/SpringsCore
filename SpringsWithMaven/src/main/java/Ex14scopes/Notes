@@ -7,11 +7,30 @@ lifetime for bean obj
   4.session  -> web  , one bean obj per user/session
   5.global-session -> web , one bean obj per application.
   
+default scope is singleton.
+
 how to specify bean:
-a) springs.xml
-<bean id="uService" 
-	class="scopes.UserService" 
-	scope="prototype"/>
+a) in springs.xml along with bean tag provide the scope attribute
+<bean id="uService" class="scopes.UserService" scope="singleton"/>
+<bean id="uService" class="scopes.UserService" scope="prototype"/>
+<bean id="uService" class="scopes.UserService" scope="request"/>
+<bean id="uService" class="scopes.UserService" scope="session"/>
+<bean id="uService" class="scopes.UserService" scope="global-session"/>
 	
-b) annoattions
+ 
+singleton
+This scopes the bean definition to a single instance per Spring IoC container (default).
+
+prototype
+This scopes a single bean definition to have any number of object instances.
+
+request
+This scopes a bean definition to an HTTP request. Only valid in the context of a web-aware Spring ApplicationContext.
+
+session
+This scopes a bean definition to an HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+
+global-session
+This scopes a bean definition to a global HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+
   

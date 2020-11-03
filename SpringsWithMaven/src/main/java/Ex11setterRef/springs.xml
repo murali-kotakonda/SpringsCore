@@ -3,15 +3,35 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+  <!-- 
+        For resolving string/int/float/double  as dependency 
+         use  value attribute along with <property> tag.
+       
+	       For resolving obj as dependency 
+	       use  ref attribute along with <property> tag.
+      we need to give the second bean id value to the 1st bean using ref attribute.
+	  
+	 -->
+  
 	<bean id="aService" 
-		class="com.springs.di.setterRef.AccountService">
-		<property name="dbName" value="SQLserver" />
-	</bean>
-
-	<bean id="uService" 
-		class="com.springs.di.setterRef.UserService">
+		class="Ex11setterRef.AccountService">
+		<property name="dbName" value="oracle" />  <!-- this will internally calls the setDbName("oracle") method -->
+	</bean> 
+	
+	<!-- spring create the obj for AccountService and set the "Oracle" for dbName.
+	AccountService aService = new AccountService();
+	aService.setDbName("oracle" );
+	 -->
+	 
+	<bean id="uService" class="Ex11setterRef.UserService">
 		<property name="userName" value="System" />
 		<property name="accountService" ref="aService"/>
 	</bean>
+	
+  	<!-- spring create the obj for UserService and set the "system" for userName and " aService" for accountService.
+	  	UserService uService = new UserService();
+	  	uService.setUserName("system");
+	  	uService.setAccountService(aService) ;
+  	  -->
 
 </beans>

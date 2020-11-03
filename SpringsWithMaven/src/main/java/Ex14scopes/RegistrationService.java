@@ -1,10 +1,8 @@
 package Ex14scopes;
 
-
 public class RegistrationService {
 
 	 String propName;
-
 
 	public RegistrationService(String propName) {
 		super();
@@ -14,6 +12,4 @@ public class RegistrationService {
 	public String getPropName() {
 		return propName;
 	}
-
-	 
 }

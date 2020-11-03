@@ -92,13 +92,6 @@ steps:
 
  
  
- 
- 
- 
- 
-  
-      
- 
 Spring JDBC template offers several ways to query the database. 
 -----------------------------------------------------------------
 queryForList() returns a list of HashMaps. 

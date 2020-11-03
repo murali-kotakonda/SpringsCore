@@ -13,5 +13,4 @@ public class UserService {
 	 public void process( ){
 		 System.out.println("processing user ... with userName="+userName+"  , pass="+pass);
 	 }
-
 }

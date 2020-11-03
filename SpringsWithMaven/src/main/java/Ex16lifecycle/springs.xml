@@ -3,8 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="aService" 
-		class="com.springs.lifecycleInf.AccountService" >
+	<bean id="aService" class="Ex16lifecycle.AccountService">
 		<property name="dbName" value="SQLserver" />
 	</bean>
 

@@ -1,6 +1,7 @@
 package lifecycle3
 
-how to defone global init method and also kind of interceptor:
+how to define global init method and also kind of interceptor:
+[common init method for all bean classes ]
 
 steps:
 1.create class that implements BeanPostProcessor interface and override postProcessAfterInitialization() and postProcessBeforeInitialization().
@@ -25,71 +26,5 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 }
 
 
-
-import org.springframework.beans.factory.InitializingBean;
-
-public class AccountService  {
-
-	private String dbName;
-
-	private String dbName1;
-
-	public String getDbName1() {
-		return dbName1;
-	}
-	public void setDbName1(String dbName1) {
-		System.out.println(" setDbName1 ");
-		this.dbName1 = dbName1;
-	}
-	public String getDbName() {
-		return dbName;
-	}
-	public void setDbName(String dbName) {
-		System.out.println(" setDbName ");
-		this.dbName = dbName;
-	}
-
-	public AccountService() {
-		System.out.println("ac obj creted");
-	}
-	public void save() {
-		System.out.println("account- save");
-	}
- }
-
-
-
-
-public class ProductService {
-
-	public ProductService(){
-		System.out.println("prodservice constr");
-	}
-	public void save(){
-		//saving to db
-		System.out.println("saving ::");
-	}
-}
-
-
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
-	<bean id="aService" 
-	class="lifecycle3.AccountService">
-		<property name="dbName" value="SQLserver" />
-		<property name="dbName1" value="oracle" />
-	</bean>
-
-	<bean id="pService" 
-	class="lifecycle3.ProductService" />
-
-	<bean id="bService" 
-	class="lifecycle3.MyBeanPostProcessor" 
-	/> 
-
-</beans>
-
+ 
 

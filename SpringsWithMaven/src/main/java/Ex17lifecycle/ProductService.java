@@ -7,6 +7,6 @@ public class ProductService {
 	}
 	public void save(){
 		//saving to db
-		System.out.println("saving ::");
+		System.out.println("saving  Product::");
 	}
 }

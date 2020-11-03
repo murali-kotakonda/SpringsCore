@@ -1,5 +1,11 @@
 package Ex10setterInject;
-
+/**
+UserService is a bean class.
+UserService has userName and pass  as dependency.
+spring has to create the obj for UserService and set the data for userName and pass.
+since we are using setter injection we need to write the setter methods for every property in UserService
+and write bean tag for UserService with two <property> tag.
+ */
 public class UserService {
 
 	private String userName;
