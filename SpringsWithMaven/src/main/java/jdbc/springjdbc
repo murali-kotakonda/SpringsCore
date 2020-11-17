@@ -1,7 +1,7 @@
-Springs JDBC:
+Springs JDBC:[for database connectivity ] 
 ------------
 - framework for db related code
-- it is not a orm
+- Unlike Hibernate it is not a orm
 - we need write the sql queries
 
 problems of JDBC API
@@ -25,7 +25,7 @@ e.g. release the database connections.
  better understandable error messages.
  - need only the jdbctemplate obj
  -exception handling is optional
-
+- has inbuilt methods for mapping rows to the java layer.
 
 TABLE: EmployeeInfo 
 COLUMNS: ID, NAME, SALARYINFO

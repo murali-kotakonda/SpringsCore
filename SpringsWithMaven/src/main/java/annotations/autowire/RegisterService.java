@@ -3,6 +3,12 @@ package annotations.autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ @Autowired can be used
+- before field
+- before constructr
+- before setter method.
+ */
 @Service
 public class RegisterService {
 

@@ -12,10 +12,7 @@ public class Application {
     private ApplicationUtil util;									
  
     public void process(){
-    	System.out.println("in process");
+    	System.out.println("Application::in process  method");
     	util.save();
-    }
-    public String toString() {
-        return "ApplicationUtil [util=" + util + "]";
     }
 }

@@ -1,34 +1,12 @@
-@Configuration - 
- that the class can be used by the Spring
-  IoC container as a source of bean definitions. 
 
-@Bean  - annotation tells Spring that a 
-method annotated with @Bean will
- return an object that should be registered as a bean 
-life cycle 
-:(initMethod = "init", destroyMethod = "cleanup" )
-@Scope - bean scope
-
-
-@Component,
-	@Component is a generic stereotype for any Spring-managed component. 
-@Repository 
-@Service
-	@Repository, @Service, and @Controller are specializations of @Component for 
-	more specific use cases, for example, in the persistence, service, and presentation layers, respectively
-
-	- how to specify scope , init method , destroy method in nannotations
-	- inject the object on run time 
-	- using annotation how to injevct primitive data types.
-	
 	
 	
 
 @Autowired
 - Autowiring optional with attribute required=”false”
 	@Autowire by default is a type driven injection.
-	 @Qualifier spring annotation can be used to further fine-tune autowiring.
-	@Resource (javax.annotation.Resource) annotation can be used for wiring by name.
+	@Qualifier spring annotation can be used to further fine-tune autowiring.
+-@Resource (javax.annotation.Resource) annotation can be used for wiring by name.
 
 
 @Resource annotation marks a resource that is needed by the application. 
@@ -37,27 +15,9 @@ But with name attribute, @Resource allows you to inject a bean by it’s name,
 which @Autowired does not.
 
 
-@Controller
-Annotate your controller classes with @Controller.
-
 
 @RequestMapping
  @RequestMapping spring annotation to map URLs onto an entire class or a particular handler method
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @Autowired	Constructor, Field, Method	Declares a constructor, field, setter method, or configuration method to be autowired by type. Items annotated with @Autowired do not have to be public.

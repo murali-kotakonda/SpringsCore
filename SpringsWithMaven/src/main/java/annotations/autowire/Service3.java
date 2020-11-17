@@ -1,14 +1,21 @@
-package annotations.resource;
+package annotations.autowire;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component(value = "myAppUtil")
+
+/**
+ How to specify the scopes using annotations
 @Scope(value = "singleton")
-public class ApplicationUtil {
+@Scope(value = "prototype")
+ */
+
+@Component(value = "service1")
+public class Service3 {
  
     public void save(){
     	System.out.println("applicationUtil save : ");
     }
     
 }
+

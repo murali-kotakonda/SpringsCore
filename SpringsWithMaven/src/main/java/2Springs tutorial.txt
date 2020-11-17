@@ -23,7 +23,6 @@ custom builtin
 
 IOC:
 -----
-
 BeanFactory ---- > creates the objs when getBean method is called
 ApplicationContext (builds on top of BeanFactory  )-----> creates the objs during the loading i.e. before getBean() method
 
