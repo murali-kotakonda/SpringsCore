@@ -28,7 +28,12 @@ e.g. release the database connections.
 - has inbuilt methods for mapping rows to the java layer.
 
 TABLE: EmployeeInfo 
-COLUMNS: ID, NAME, SALARYINFO
+
+COLUMNS: 
+ID- Number, 
+NAME- varchar,
+SALARYINFO - Number
+
 
 
 
@@ -49,42 +54,60 @@ or add maven dependency
 5.Provide EmployeeDAO.java -> spring jdbc related code
 
 
+For working with spring jdbc we need JdbcTemplate object.
 
+EmployeeDao - dao class that contains the java code for table CRUD opeartions.
+EmployeeDao requires JdbcTemplate object
+JdbcTemplate object requires DataSource object
+DataSource requires  db properties.
 
 EmployeeDao   -> JdbcTemplate -> DataSource -> db properties.
- 
 
-We need to write bean tags for EmployeeDao +  JdbcTemplate  +  DataSource 
+We need to write bean tags for  EmployeeDao +  JdbcTemplate  +  DataSource 
  
-create/update/delete queries   --> JdbcTemplateObj.update("<query>","<data to the query>")
-read  -->  JdbcTemplateObj.query("<query>","<data to the query>",<rowmapper obj or resultset extractor obj>)   
+Methods:
+------------
+
+1.create/update/delete queries   --> JdbcTemplateObj.update("<query>","<data to the query>")
+
+2.read  -->  JdbcTemplateObj.query("<query>","<data to the query>",<rowmapper obj or resultset extractor obj>)   
+
 
 
 Read:
 --------
-SELECT QUERY
+
+Multiple Columns : [single/multiple rows]
+----------------------------------------------
+
+
+ 
   
 TWO approaches 
 1.ResultSetExtractor  (interface) . method to override = extractData(ResultSet rs) 
 2.RowMapper  (interface) .method to override = mapRow(ResultSet rs, int rowNo)
 
-
+For executing queries:
 jdbcTemplate.query( <SQL QUERY> ,<data to query> , <object of RowMapper or object of ResultSetExtractor>)
   
   
 choose anonymous inner class : create child class + override method + create object.
-  
-  
-extractData() / mapRow() :---> convert row to java object uisng resultset.
+
+ Logic to be written:
+ --------------------------
+ extractData() / mapRow() :---> convert row to java object using resultset.
+
 
  logic to convert row to java obj:
+ i/p: resultset obj [is provided by jdbc]
 ---------------------------------------
  int id = rs.getInt("ID");
  String myname = rs.getString("NAME");
  long sal = rs.getLong("SALARYINFO"); 
  Employee e   = new Employee (id,myname,sal);
 
- 
+
+
 steps:
 ---------- 
 1.create obj for rowmapper or ResultsetExtractor
@@ -122,56 +145,4 @@ Jar:
 -------
 spring-jdbc.jar 
 
-usages
-----------
-
-extend JdbcDaoSupport
-
-String SQL = "select count(*) from Student";
-int rowCount = jdbcTemplateObject.queryForInt( SQL );
-
-long rowCount = jdbcTemplateObject.queryForLong( SQL );
-
-int age = jdbcTemplateObject.queryForInt(SQL, new Object[]{10});
-
-String name = jdbcTemplateObject.queryForObject(SQL, new Object[]{10}, String.class);
-
-
-String SQL = "select * from Student where id = ?";
-Student student = jdbcTemplateObject.queryForObject(
-   SQL, new Object[]{10}, new StudentMapper());
-
-public class StudentMapper implements RowMapper<Student> {
-   public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-      Student student = new Student();
-      student.setID(rs.getInt("id"));
-      student.setName(rs.getString("name"));
-      student.setAge(rs.getInt("age"));
-      
-      return student;
-   }
-}
-
-
-
-String SQL = "insert into Student (name, age) values (?, ?)";
-jdbcTemplateObject.update( SQL, new Object[]{"Zara", 11} );
-
-
-String SQL = "update Student set name = ? where id = ?";
-jdbcTemplateObject.update( SQL, new Object[]{"Zara", 10} );
-
-String SQL = "delete Student where id = ?";
-jdbcTemplateObject.update( SQL, new Object[]{20} );
-
-
-String SQL = "CREATE TABLE Student( " +
-   "ID   INT NOT NULL AUTO_INCREMENT, " +
-   "NAME VARCHAR(20) NOT NULL, " +
-   "AGE  INT NOT NULL, " +
-   "PRIMARY KEY (ID));"
-
-jdbcTemplateObject.execute( SQL );
-
-
-
+ 

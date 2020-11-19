@@ -18,7 +18,7 @@ public static void main(String[] args) {
 	Employee  emp = new Employee(id, name, 0);
 
 	ApplicationContext context = new ClassPathXmlApplicationContext(
-			"file:src/jdbc/springs.xml");
+			"file:src/main/java/jdbc/springs.xml");
 	EmployeeDao dao = (EmployeeDao) context.getBean("empDao");
 	
 	int status = dao.updateName(emp);

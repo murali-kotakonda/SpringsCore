@@ -32,7 +32,7 @@ public class TestDelete {
 	
 	private static void deletById() {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"file:src/com/spring/jdbc/springs.xml");
+				"file:src/main/java/jdbc/springs.xml");
 		EmployeeDao dao = (EmployeeDao) context.getBean("empDao");
 		
 		Scanner sc = new Scanner(System.in);
