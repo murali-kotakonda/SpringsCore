@@ -1,0 +1,227 @@
+MVC : Model View Controller
+
+Spring MVC helps in building flexible and loosely coupled web applications. 
+
+The Model-view-controller design pattern  helps in seperating the business logic, presentation logic and navigation logic.
+
+In Spring Web MVC,  DispatcherServlet class works as the front controller. 
+It is responsible to manage the flow of the spring mvc application.
+
+
+Spring MVC   provides an elegant solution to use MVC in spring framework by the help of DispatcherServlet.
+
+
+ Refer WAR STRUCTURE/web app structure:
+ Refer setupHib
+ 
+ 
+
+Steps:
+---------
+1.Create a maven project
+File>new>maven project
+
+2.DONT SELECT SIMPLE PROJECT. click on next
+
+select archetype:
+groupId:org.apache.maven.archetypes 
+artifact:maven-archetype-web 
+version:1.0
+
+3.Type
+GroupId: Regnant
+ArtifactId:springmvc
+
+4.Under pom.xml:
+------------------
+add dependencies:
+
+<dependency>  
+    <groupId>org.springframework</groupId>  
+    <artifactId>spring-webmvc</artifactId>  
+    <version>5.1.1.RELEASE</version>  
+</dependency>  
+  
+<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->  
+<dependency>  
+    <groupId>org.apache.tomcat</groupId>  
+    <artifactId>tomcat-jasper</artifactId>  
+    <version>9.0.12</version>  
+</dependency>  
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->  
+<dependency>    
+    <groupId>javax.servlet</groupId>    
+    <artifactId>servlet-api</artifactId>    
+    <version>3.0-alpha-1</version>    
+</dependency>  
+<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->  
+<dependency>  
+    <groupId>javax.servlet</groupId>  
+    <artifactId>jstl</artifactId>  
+    <version>1.2</version>  
+</dependency>  
+    
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->  
+<dependency>  
+    <groupId>org.springframework</groupId>  
+    <artifactId>spring-jdbc</artifactId>  
+    <version>5.1.1.RELEASE</version>  
+</dependency>  
+
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.1.6.Final</version>
+</dependency>
+
+
+
+add build:
+<build>
+   <finalName>springmvc</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+5.Update the maven project   
+    
+ 5.Update the maven project   
+
+6.Add "java" and "test" folders under the src/main
+ 
+7.
+src/main/java  ----> backend code  [java/hiberate/springs mvc ..etc..]
+src/main/webapp  ---> frontend code  [html,css,jsp,.css ]
+src/main/webapp/WEB-INF  --> springs.xml , web.xml , hibernate.xml
+
+
+8 src/main/webapp/WEB-INF/web.xml:
+[add changes from web.xml]
+web.xml changes
+1.Register "DispatcherServlet" in web.xml
+2.specify the path for springs.xml
+
+
+9.create home.jsp under src/main/webapp
+
+10.Go to the Deployment-assembly
+click on add entry for '/WEB-INF/lib'
+
+
+
+11.run the application using web server
+
+12.create springs.xml under /WEB-INF
+
+13.create "views" folder under  /WEB-INF
+views will contain the jsps
+
+
+
+
+
+ 
+ 1.Create dynamic web project
+2.import the spring mvc jars and keep jar files under the lib folder
++
+add to java build path (eclipse)
++
+add to deployment assembly (eclipse)
+3. add web.xml under  WEB-INF folder
+4. add <servlet> for Dispatcher Servlet under web.xml
+any request to the backend  will come via this class
+5.add springs.xml under WEB-INF folder
+
+
+
+Create the request page (optional)
+Create the controller class
+Provide the entry of controller in the web.xml file
+Define the bean in the xml file
+Display the message in the JSP page
+Load the spring core and mvc jar files
+Start server and deploy the project
+
+
+ 
+ 
+ 
+ 
+DispatcherServlet
+-----------------
+ - DispatcherServlet first receives the request.
+ - DispatcherServlet consults the HandlerMapping and 
+ invokes the Controller associated with the request.
+ - Controller process the request by calling the 
+ appropriate service methods and returns a 
+ ModeAndView object to the DispatcherServlet. 
+ The ModeAndView object contains the model data 
+ and the view name.
+ - DispatcherServlet sends the view name to a 
+ ViewResolver to
+  find the actual View to invoke.
+ -  DispatcherServlet will pass the model object 
+ to the View to render the result.
+- View with the help of the model data will 
+render the result back to the user.
+
+view resolver config:
+------------------------
+<bean id="viewResolver"
+class=" org.springframework.web.servlet.view.InternalResourceViewResolver" >
+    <property name="prefix">
+        <value>/WEB-INF/jsp/</value>
+    </property>
+    <property name="suffix">
+        <value>.jsp</value>
+    </property>
+</bean>
+
+
+@Controller annotation
+ is used to mark the class as the controller 
+
+@RequestMapping annotation is used to map the request url.
+
+
+controller class:
+----------------
+import org.springframework.stereotype.Controller;  
+import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.web.servlet.ModelAndView;  
+@Controller  
+public class HelloWorldController {  
+    @RequestMapping("/hello")  
+    public ModelAndView helloWorld() {  
+        String message = "HELLO SPRING MVC HOW R U";  
+        return new ModelAndView("hellopage", "message", message);  
+    }  
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+
+		model.addAttribute("message", "Spring 3 MVC Hello World");
+		return "hello";
+
+	}
+
+	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
+	public ModelAndView hello(@PathVariable("name") String name) {
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("hello");
+		model.addObject("msg", name);
+
+		return model;
+
+	}
+}  

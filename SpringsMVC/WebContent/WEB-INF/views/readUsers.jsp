@@ -1,4 +1,4 @@
-<%@page import="com.mnp.dto.Person"%>
+<%@page import="com.myapp.dto.Person"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
