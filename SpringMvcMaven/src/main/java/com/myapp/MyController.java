@@ -26,7 +26,7 @@ import com.myapp.dto.Employee;
 public class MyController {
 	
 	@Autowired
-	RegisterService service;
+	UserService service;
 
 	/**
 	Req:

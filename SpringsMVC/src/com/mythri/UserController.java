@@ -26,17 +26,23 @@ public class UserController {
 	RegisterService service;
 //
 	/*
-	 * Activity:
+Activity:
 1.Capture the request data
 and
-2.Keep inside the object doen by springs
+2.Keep inside the object done by springs
 
+problem:
+------------------
+request capturing + keep req data inside the obj becomes complex/more lines of code when 
+we have many fields coming from the web page
 
-	request capturing + keep req data inside the obj becomes complex/more lines of code when 
-	we have many fields coming from the web page
+If a web page has 30 fields then we need to write 
+ @RequestParam for 30 times
+ and we need to keep all 30 info inside the obj.
+ 
 Requirement:
 ------------------
-capture the followin info from the web page
+capture the following info from the web page
   firstname
   lastname   
   email
@@ -46,35 +52,48 @@ capture the followin info from the web page
   gender   - radio
   idProofs  - checkbox
   address  - textarea
-  
-  
-  Technically:
+
+solution:
+------------
+instaed of writing @RequestParam 30 times use @ModelAttribute one time on the object
+1.Capture the request data
+and
+2.Keep inside the object taken care  by springs
+
+ 
+Technically:
 -----------------------
   reqPage  jsp
   response jsp
-  
+  controller method
 
 Java changes:
 
-1.Create new Controller: UserController.java
-2.Create a pojo class : UserInfo.java
-  for every form there is a java class
+1.Create new Controller: 
+UserController.java
+2.Create a pojo class :
+UserInfo.java for every form there is a java class
   
  
-
-
-Since Springs is perforimg req capturing + setting data we need to use the spring tags 
+Since Springs is performing req capturing + setting data we need to use the spring tags in the jsps.
+ex:
+ <input type="text" name="userName"/>
+ <form:input path="userName" /> 
+ 
+ <input type="text" name="age"/>
+ <form:input path="age" />
+  
 the field name in addUser.jsp is equal to the instance variable of UserInfo.java
-
 
 In web page use  : spring tags
 In java -> instead of @RequestParam use @ModelAttribute
 
+spring role:
+------------------
 1. convert the web form data to the java obj  [ client ---> server]
-2. Using the java obj prepare the form [serevr --> client]
+2. Using the java obj prepare the form [server --> client]
 
 */
-	
 	@RequestMapping(value = "/user1", method = RequestMethod.GET)
 	public ModelAndView showUserForm1() {
 		return new ModelAndView("addUser1", "userData",new UserInfo());
@@ -261,11 +280,14 @@ In java -> instead of @RequestParam use @ModelAttribute
  	 * //write @Valid for the controller method ; before the form object
 		//in the form class for every instance variable write the validator annotations.
 	 */
+	
+	//method when clicking on link
 	@RequestMapping(value = "/validateLogin", method = RequestMethod.GET)
 	public ModelAndView viewLogin() {
 		return new ModelAndView("LoginForm", "userForm", new User());
 	}
 
+	//method when clicking on button
 	@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
 	public String doLogin(
 			@Valid 

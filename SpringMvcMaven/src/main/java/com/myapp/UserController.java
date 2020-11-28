@@ -19,11 +19,15 @@ import com.myapp.dto.User;
 import com.myapp.exception.EmployeeException;
 
 
+/**
+ * @author I335484
+ *
+ */
 @Controller
 public class UserController {
 	
 	@Autowired
-	RegisterService service;
+	UserService service;
 
 /*
 	Activity:
@@ -67,7 +71,7 @@ public class UserController {
 	In java -> instead of @RequestParam use @ModelAttribute
 	
 	1. convert the web form data to the java obj  [ client ---> server]
-	2. Using the java obj prepare the form [serevr --> client]
+	2. Using the java obj prepare the form [server --> client]
 */
 	
 	@RequestMapping(value = "/user1", method = RequestMethod.GET)
@@ -193,17 +197,39 @@ public class UserController {
 	}
 	
 	/*
+	 Req:
+		input:
+			firstname
+			lastname
+			email
+			telephone
+			age
+			city
+			gender
+			idProofs
+			address
+			->telephone should be 10 chars.
+		->firstname min 10 chars.
+		->last name min 8 chars.
+		->age between 18 and 60.
+		
+		validate and show   error message using exception handling
+	
 	1. Create Exception class
 	2. throw Exception obj
 	3.handle using try + catch
   
 	1.when data is invalid throw the exception      -> service class
 	2.catch the exception and handle the exception  -> controller class
-		->telephone should be 10 chars.
 		
-		->firstname min 10 chars.
-		->last name min 8 chars.
-		->age between 18 and 60.
+		if validation is success then show response from showUserInput.jsp
+		if validation is failure then show response from errorpage.jsp
+		
+		when exception is thrown then only the exception handling code is executed.
+		write ExceptionHandler for every exception.
+		the handlException method to return ModelAndView object.
+		handlException method is called when there is an exception
+		
 	*/
 	@RequestMapping(value = "/addUser3", method = RequestMethod.POST)
 	public ModelAndView addUserWithValidation(
@@ -212,19 +238,12 @@ public class UserController {
 			service.processValidation(userInfoObj);
 			return new ModelAndView("showUserInput", "userObj",userInfoObj);	
 	}
-	/*
-	 //if validation is succes then show response from showUserInput.jsp
-		//if validation is faiilure then show response from errorpage.jsp
-		//when exception is thrown then only the exception handling code is executed.
-	//write ExceptionHandler for every exception.
-	//the handleexception method to return ModelAndView object.
-	//handleexception method is called when there is an exception
-	 **/
+
+	//exception handling logic for EmployeeException instead of try catch write below method
 	@ExceptionHandler(EmployeeException.class)
-	public ModelAndView handleEmployeeException(
-			HttpServletRequest request, Exception ex){
+	public ModelAndView handleEmployeeException( Exception ex){
 		ModelAndView modelAndView = new ModelAndView("errorpage");
-	    modelAndView.addObject("message", ex.getMessage());
+	    modelAndView.addObject("message", "error occured due to :"+ex.getMessage());
 	    return modelAndView;
 	}
 	
@@ -243,22 +262,50 @@ public class UserController {
  	 //write @Valid for the controller method ; before the form object
 	 //in the form class for every instance variable write the validator annotations.
 	 */
-	@RequestMapping(value = "/validateLogin", method = RequestMethod.GET)
-	public ModelAndView viewLogin() {
-		return new ModelAndView("LoginForm", "userForm", new User());
-	}
-
-	@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
-	public String doLogin(
-			@Valid 
-			@ModelAttribute("userForm") User userForm,
-			BindingResult result) {
-		if (result.hasErrors()) {
-			return "LoginForm";
-		}
-		return "LoginSuccess";
-	}
 	
+	//click on link on home.jsp
+	/**
+	Req:
+	Validation on syntax for email and password on login page
+
+	New:
+	------------
+	1.use @Valid   in the controller method along with 	@ModelAttribute
+	2. in the Pojo User.java
+	use annotations for validations.
+		@NotEmpty
+		@Email
+	  @NotEmpty(message = "Please enter your password.")
+		@Size(min = 6, max = 15,message = "Your password must between 6 and 15 characters")
+		
+	 */
+	@RequestMapping(value = "/validateLogin", method = RequestMethod.GET)
+		public ModelAndView viewLogin() {
+			return new ModelAndView("LoginForm", "userForm", new User());
+		}
+
+	//click on button on LoginForm.jsp
+		@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
+		public String doLogin(
+				@Valid 
+				@ModelAttribute("userForm") User userForm,
+				BindingResult result) {
+			if (result.hasErrors()) {
+				return "LoginForm";
+			}
+			return "LoginSuccess";
+		}
+		
+		
+	/**
+	  ACTIVITY:
+	- use code jsp   for jsp in another jsp
+	-display all the  links in every page.
+	
+	1. create home.jsp in views
+	2. in every jsp write 
+		<jsp:include page="home.jsp"/>
+	 */
 	@RequestMapping(value = "/redirect1", method = RequestMethod.GET)
 	public ModelAndView redirect1(HttpServletRequest req) {
 		req.setAttribute("msg1", "hello from redirect");

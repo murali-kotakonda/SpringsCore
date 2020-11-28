@@ -7,7 +7,7 @@
 	<font color="red">${errorMsg}</font>
 
 	<h2>Add User1</h2>
-	<form:form method="post" action="addNewUser" commandName="userData">
+	<form:form method="post" action="addNewUser" modelAttribute="userData">
 		<jsp:include page="addUser.jsp"/>
 	</form:form>
 </body>

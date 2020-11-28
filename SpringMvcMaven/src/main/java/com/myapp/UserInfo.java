@@ -10,9 +10,17 @@ public class UserInfo {
 	private Integer age;   //	<form:input path="age" />
 	private String city;    //	<form:input path="city" />
 	  
-	private String gender;   //
-	private List<String> idProofs;  //
-	private String  address;  //
+	private String gender;   
+	  //<form:radiobutton path="gender" value="Male" />
+	  //<form:radiobutton path="gender" value="Female" />
+	  
+	private List<String> idProofs;  
+	  //<form:checkbox path="idProofs" value="Voter"/>  
+	  // <form:checkbox path="idProofs" value="Pan"/> 
+	  //<form:checkbox path="idProofs" value="passport"/>  
+	  
+		private String  address;  
+	  // <form:textarea path="address" />  
 	
 	public String getAddress() {
 		return address;

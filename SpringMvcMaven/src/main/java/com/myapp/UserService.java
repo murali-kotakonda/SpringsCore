@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myapp.exception.EmployeeException;
 
 @Service
-public class RegisterService {
+public class UserService {
 	
 	public List<String> validateUserInfo(UserInfo userInfoObj) {
 		List<String> errors = new ArrayList<>();
