@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-Welcome ${name}
+Welcome ${name}<br>
 	<a href="profile?loginName=${loginName}" name="My Profile" value="My Profile">My Profile </a>&nbsp;&nbsp;&nbsp;
      
     <a href="addEmp">Add Emp</a>&nbsp;&nbsp;&nbsp;

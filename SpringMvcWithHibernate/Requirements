@@ -1,3 +1,79 @@
+Req:
+------------
+Table: Employee_Details
+
+columns:
+id
+fname
+lname
+age
+salary
+loginname
+password
+email
+
+Provide web pages for
+-> Create Employee
+-> Update Employee
+-> Delete Employee
+-> Read Employee By Id
+-> Read All Employees
+
+steps:
+---------------
+1.Create the entity class "Employee.java" using hibernate annotations.
+
+
+2.Create 
+EmployeeController.java    -> mvc related code
+EmployeeService.java   -> businsess related code
+EmployeeDao.java  -> hibenate code 
+
+3.
+EmployeeController has EmployeeService obj as dependency
+EmployeeService has EmployeeDao as dependency
+EmployeeDao has SessionFactory as dependency
+
+EmployeeController ,EmployeeService , EmployeeDao , SessionFactory objs are created by springs.
+
+4.syntaxes:
+
+Syntax for EmployeeDao.java:
+-----------------------------
+@Repository("empDao")
+public class EmployeeDao {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+  
+  }
+  
+  
+Syntax for EmployeeService.java:
+-----------------------------  
+@Service("employeeService")
+@Transactional
+public class EmployeeService {
+
+	@Autowired
+	private EmployeeDao employeeDao;
+  
+}
+
+
+Syntax for EmployeeService.java:
+-----------------------------  
+
+@Controller
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService employeeService;
+  
+  
+}
+
+
 Req 1:My Profile
 -----------
 Under My profile show  "Change password" and "Update Profile".

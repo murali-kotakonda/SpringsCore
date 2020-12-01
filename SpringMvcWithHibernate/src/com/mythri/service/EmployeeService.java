@@ -18,6 +18,9 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
+	/**
+	 this method is used for "Register" and "Add User" Scenarios.
+	 */
 	@Transactional
 	public void addEmployee(Employee employee) throws UserException {
 		if (employeeDao.isEmployeeExists(employee.getLoginName()))

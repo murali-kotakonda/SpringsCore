@@ -1,0 +1,10 @@
+Assignments:
+	----------------
+	1.LoginName has to be unique
+	If loginName exits give a msg "LoginName already Exist" and retain data
+	2.Email has to be unique
+	If loginName exits give a msg "Email already Exist" and retain data
+	3.search by id
+	4.search by name
+	5.show all users should not show ur name
+	

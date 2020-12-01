@@ -25,20 +25,9 @@ import com.mythri.util.UserException;
 
 /**
  * @author APSTEP
-	EmployeeController has EmployeeService obj as dependency
-	EmployeeService has EmployeeDao as dependency
-	EmployeeDao has SessionFactory as dependency
-	
-	EmployeeController ,EmployeeService , EmployeeDao , SessionFactory objs are created by springs.
  */
 @Controller
 public class EmployeeController {
-
-	private static final String MSG = "msg";
-
-	private static final String EMP = "emp";
-
-	public static final String COMMAND = "command";
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -46,36 +35,66 @@ public class EmployeeController {
 	@Autowired
 	private MessageSource messageSource;
 
+	/**
+		 Req:
+	logined user can also create a employee using the "Add Emp" link.
+	1.click on "Add Emp" Link     --> need a controller method
+	show the add employe form
+	
+	2.Fill the data for fName, lname, age ,email , salary, loginname , password
+	and click on "Add employee" Button  --> need a controller method
+	 */
+	
+	 //controller method for click on "Add Emp" Link and show response using "showAddEmp.jsp"
 	@RequestMapping("/addEmp")
-	public ModelAndView showAddEmp() {
+	public ModelAndView showAddEmpByUser() {
 		Employee employee = new Employee();
 		return new ModelAndView("showAddEmp", "command", employee);
 	}
 
+	/**
+	   controller method customer  clicks on "Add Emp" Button and
+	   If success show response using "showEmp.jsp"
+	    If failure show response with error msg using "showAddEmp.jsp"
+	    emp.jsp is reused for "My Profile" and "Add User" (Success) scenarios.
+	 */
 	@RequestMapping(value = "/addEmp", method = RequestMethod.POST)
-	public ModelAndView addEmp(@Valid 
+	public ModelAndView addEmpByUser(@Valid 
 			@ModelAttribute("employee") 
 			Employee employee, BindingResult result) {
 		if (result.hasErrors()) {
 			String message = "Error while creating emp";//getErrorMsg(result);
 			ModelAndView model = new ModelAndView("showAddEmp", "command", employee);
-			model.addObject(MSG, message);
+			model.addObject("msg", message);
 			return model;
 		}
-
 		try {
 			employeeService.addEmployee(employee);
 		} catch (UserException e) {
 			String msg = e.getMessage();
-			ModelAndView modelAndView = new ModelAndView("showAddEmp", COMMAND, employee);
-			modelAndView.addObject(MSG, msg);
+			ModelAndView modelAndView = new ModelAndView("showAddEmp", "command", employee);
+			modelAndView.addObject("msg", msg);
 			return modelAndView;
 		}
-		ModelAndView model = new ModelAndView("showEmp", EMP, employee);
-		model.addObject(MSG, "Employee Created!");
+		ModelAndView model = new ModelAndView("showEmp", "emp", employee);
+		model.addObject("msg", "Employee Created!");
 		return model;
 	}
 
+	
+	 /*controller method when customer clicks on "show all users" link
+	   show response using showEmps.jsp
+	  url writing:
+	 -----------------------
+	  <a href="./editEmp?empId=${emp.id}">Edit</a></td>
+	  we are using then url rewriting for sending the dynamic data along with the url
+	  */
+	@RequestMapping("/getAllEmps")
+	public ModelAndView getAllEmps() {
+		List<Employee> emps = employeeService.getEmployees();
+		return new ModelAndView("showEmps", "emps", emps);
+	}
+		
 	@RequestMapping("/readUser")
 	public String showGetEmp() throws Exception {
 		return "readUser";
@@ -86,29 +105,23 @@ public class EmployeeController {
 		Employee employee = employeeService.getEmpById(empId);
 		ModelAndView modelAndView = new ModelAndView("readUser");
 		if(employee==null){
-			modelAndView.addObject(MSG,"Employee Not found");
+			modelAndView.addObject("msg","Employee Not found");
 		}else{
-			modelAndView.addObject(EMP,employee);
+			modelAndView.addObject("emp",employee);
 		}
 		return modelAndView;
 	}
 	/*
-	 
 		-> first we need to click on edit Link on the "show All Emps" response page
 		-> The edit link should carry the emp Id of the employee we want to edit
 		we have to add the Edit Link for every employee in the response page.
 		  ex: <a href="./editEmp?empId=${emp.id}">Edit</a>
-		
-		 
 		 
 		1. Show the current existing data of the employee when we click on edit link.
 		  The form will contain hidden form fields for id + loginame [not visisble to customer]
 		  On click of "Update Emp" button id + loginname+fn+ln+email+age+salary is submitted to the backend.
 		    
 		2.On click of "Update Emp" , the new data should be updated for the employee...... 
-		     
-
-     
 	 */
 	@RequestMapping("/editEmp")
 	public ModelAndView showEditEmp(@RequestParam("empId") int empId) {
@@ -123,19 +136,19 @@ public class EmployeeController {
 		if (result.hasErrors()) {
 			String message = getErrorMsg(result);
 			ModelAndView model = new ModelAndView("showEditEmp", "command", employee);
-			model.addObject(MSG, message);
+			model.addObject("msg", message);
 			return model;
 		}
 
 		try {
 			employeeService.updateEmployee(employee);
 			ModelAndView modelAndView = new ModelAndView("showEmp", "emp", employee);
-			modelAndView.addObject(MSG,"update successful!!");
+			modelAndView.addObject("msg","update successful!!");
 			return modelAndView;
 		} catch (UserException e) {
 			String msg = e.getMessage();
-			ModelAndView modelAndView = new ModelAndView("showEditEmp", COMMAND, employee);
-			modelAndView.addObject(MSG, msg);
+			ModelAndView modelAndView = new ModelAndView("showEditEmp", "command", employee);
+			modelAndView.addObject("msg", msg);
 			return modelAndView;
 		}
 	}
@@ -160,12 +173,6 @@ public class EmployeeController {
 		return new ModelAndView("deleteUser", "messageInfo", "Deleted successfully");
 	}
 
-	@RequestMapping("/getAllEmps")
-	public ModelAndView getAllEmps() {
-		List<Employee> emps =employeeService.getEmployees();
-		return new ModelAndView("showEmps", "emps", emps);
-	}
-	
 	@ExceptionHandler(EmployeeNotFoundException.class)
 	public ModelAndView handleEmployeeNotFoundException(HttpServletRequest request, Exception ex){
 		ModelAndView modelAndView = new ModelAndView();
