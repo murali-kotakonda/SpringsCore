@@ -185,7 +185,6 @@ public class MyController {
 		
 		jsp print if name isempty or not.
 		else print invalid age.
-		
 
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.GET)

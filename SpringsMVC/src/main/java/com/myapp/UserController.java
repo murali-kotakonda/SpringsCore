@@ -1,6 +1,5 @@
 package com.myapp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myapp.dto.User;
 import com.myapp.exception.EmployeeException;
-
 
 /**
  * @author I335484
