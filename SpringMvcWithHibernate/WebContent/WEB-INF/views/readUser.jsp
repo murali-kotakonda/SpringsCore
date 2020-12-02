@@ -20,9 +20,11 @@
  </form>
 
  <br/><br/>
+ <!--   show search result code start   -->
 <c:if test="${emp != null}">
  		<jsp:include page="emp.jsp"/>
 </c:if>
+<!--   show search result code end   -->
 
 </body>
 </html>

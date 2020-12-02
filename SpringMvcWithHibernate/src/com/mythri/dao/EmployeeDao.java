@@ -33,7 +33,10 @@ public class EmployeeDao {
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		
+		//get current data
 		Employee empFromDB = getEmpById(newEmpDetails.getId());
+		
+		//update with new data
 		copyEmp(newEmpDetails, empFromDB);
 		
 		session.merge(empFromDB);

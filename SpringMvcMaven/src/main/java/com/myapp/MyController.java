@@ -299,6 +299,9 @@ Every query param is seperated by  &
 For generic data submission use GET call.
 CANNOT USE FOR SENSITIVE DATA SUBMISISON.
 Cannot handle large data. 
+All the link calls ae get calls
+
+Button call can be wither get or post call
 
 For a  post call, the data submitted by customer is not appended to URL , 
 input data is part of request body.

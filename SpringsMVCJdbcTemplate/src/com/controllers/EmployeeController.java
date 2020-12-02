@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mnp.dto.Employee;
-import com.mnp.util.EmployeeNotFoundException;
+import com.mnp.emp.exception.EmployeeNotFoundException;
 
 @Controller
 public class EmployeeController {

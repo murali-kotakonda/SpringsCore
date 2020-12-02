@@ -1,4 +1,4 @@
-package com.mnp.util;
+package com.mnp.emp.exception;
 
 //@ResponseStatus(value=HttpStatus.NOT_FOUND,reason="Employee Not Found") //404
 public class EmployeeNotFoundException extends Exception {

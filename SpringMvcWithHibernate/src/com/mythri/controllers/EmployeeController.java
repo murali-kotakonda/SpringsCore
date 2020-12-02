@@ -26,6 +26,14 @@ import com.mythri.util.UserException;
 /**
  * @author APSTEP
  */
+/**
+ * @author I335484
+ *
+ */
+/**
+ * @author I335484
+ *
+ */
 @Controller
 public class EmployeeController {
 
@@ -36,7 +44,7 @@ public class EmployeeController {
 	private MessageSource messageSource;
 
 	/**
-		 Req:
+	Req:
 	logined user can also create a employee using the "Add Emp" link.
 	1.click on "Add Emp" Link     --> need a controller method
 	show the add employe form
@@ -81,7 +89,6 @@ public class EmployeeController {
 		return model;
 	}
 
-	
 	 /*controller method when customer clicks on "show all users" link
 	   show response using showEmps.jsp
 	  url writing:
@@ -94,12 +101,20 @@ public class EmployeeController {
 		List<Employee> emps = employeeService.getEmployees();
 		return new ModelAndView("showEmps", "emps", emps);
 	}
-		
+	
+	//controller method when customer clicks on "search emp" link
 	@RequestMapping("/readUser")
 	public String showGetEmp() throws Exception {
 		return "readUser";
 	}
 	
+	/**
+	 controller method when customer clicks on "search" Button
+	  as there is a input for id use @RequestParam
+   		show response using readUser.jsp 
+        if id is valid  show show empl details
+    	if id is invalid show "Employee Not found"
+	 */
 	@RequestMapping(value="/readUser", method=RequestMethod.POST)
 	public ModelAndView getEmpById(@RequestParam("id") int empId)  throws Exception{
 		Employee employee = employeeService.getEmpById(empId);
@@ -111,24 +126,58 @@ public class EmployeeController {
 		}
 		return modelAndView;
 	}
+	
+	//controller method when customer clicks on "delete emp" link
+	@RequestMapping("/deleteEmp")
+	public String showDeleteEmp()  throws Exception{
+		return "deleteUser";
+	}
+	
+	/**
+	 controller method when customer clicks on "delete Emp" Button
+	  as there is a input for id use @RequestParam
+  	  show response using deleteUser.jsp "Deleted successfully"
+   	  if id is invalid show "Employee id Not found"
+	 */
+	@RequestMapping(value="/deleteEmp", method=RequestMethod.POST)
+	public ModelAndView deleteEmp(@RequestParam("id") int userId )  throws Exception{
+		Employee emp = new Employee();
+		emp.setId(userId);
+		boolean status = employeeService.deleteEmployee(emp);
+		if(!status){
+			return new ModelAndView("deleteUser", "messageInfo", "Employee Id Not found.");
+		}
+		return new ModelAndView("deleteUser", "messageInfo", "Deleted successfully");
+	}
 	/*
 		-> first we need to click on edit Link on the "show All Emps" response page
 		-> The edit link should carry the emp Id of the employee we want to edit
-		we have to add the Edit Link for every employee in the response page.
+		we have to add the Edit Link for every employee in the "show All Emps"  response page.
 		  ex: <a href="./editEmp?empId=${emp.id}">Edit</a>
 		 
+		 Flow#1:[ show curr data]
 		1. Show the current existing data of the employee when we click on edit link.
-		  The form will contain hidden form fields for id + loginame [not visisble to customer]
-		  On click of "Update Emp" button id + loginname+fn+ln+email+age+salary is submitted to the backend.
+		Customer can edit fn,ln ,email ,age ,salary.
+        Hidden form fields for id + loginame
+		The form will contain hidden form fields for id + loginame [not visible to customer]
+		On click of "Update Emp" button id + loginname+fn+ln+email+age+salary is submitted to the backend.
 		    
 		2.On click of "Update Emp" , the new data should be updated for the employee...... 
 	 */
+	//method to show curr emp data based on emp id
 	@RequestMapping("/editEmp")
 	public ModelAndView showEditEmp(@RequestParam("empId") int empId) {
 		Employee emp = employeeService.getEmpById(empId);
 		return new ModelAndView("showEditEmp", "command", emp);
 	}
 	
+	
+	/**
+	 controller method to update employee .
+	 On click of "Update Emp" , the new data should be updated for the employee......
+	 
+	 once update is success show "showEmp.jsp"
+	 */
 	@RequestMapping(value = "/editEmp", method = RequestMethod.POST)
 	public ModelAndView updateEmp(
 			@Valid @ModelAttribute("employee") Employee employee, 
@@ -139,7 +188,6 @@ public class EmployeeController {
 			model.addObject("msg", message);
 			return model;
 		}
-
 		try {
 			employeeService.updateEmployee(employee);
 			ModelAndView modelAndView = new ModelAndView("showEmp", "emp", employee);
@@ -151,26 +199,6 @@ public class EmployeeController {
 			modelAndView.addObject("msg", msg);
 			return modelAndView;
 		}
-	}
-	
-	@RequestMapping("/deleteEmp")
-	public String showDeleteEmp()  throws Exception{
-		return "deleteUser";
-	}
-	
-	@RequestMapping(value="/deleteEmp", method=RequestMethod.POST)
-	public ModelAndView deleteEmp(@RequestParam("id") int userId,HttpSession session)  throws Exception{
-		Integer myId = (Integer)session.getAttribute("myId");
-		if(myId==userId) {
-			return new ModelAndView("deleteUser", "messageInfo", "You cannot delete your Profile..");
-		}
-		Employee emp = new Employee();
-		emp.setId(userId);
-		boolean status = employeeService.deleteEmployee(emp);
-		if(!status){
-			return new ModelAndView("deleteUser", "messageInfo", "Employee Id Not found.");
-		}
-		return new ModelAndView("deleteUser", "messageInfo", "Deleted successfully");
 	}
 
 	@ExceptionHandler(EmployeeNotFoundException.class)
