@@ -1,0 +1,74 @@
+life-cycle of spring bean objects:
+------------------------------------
+1.loading class 
+2.create object 
+3.resolve the dependencies
+4.initialization 
+5.service method execution
+6.destroy
+
+
+Phase                 			Responsible                 Frequency
+------------------------------------------------------------------------------
+1.loading class    			 	-> Springs   ,                  1 time
+2.create object     			-> Springs                      1 time (singleton)
+															    > 1 ( prototype/rqeuest/session/global-session) 
+3.resolve the dependencies 		-> Springs                      1 time  
+                                                               (either constr injection or setter injection)
+                                                               ( setter methods or constrs are called automatically)
+4.initialization           -> init() method provided by developer and invoked by  Springs , 1 time (optional)
+ myInit() 
+5.service method           -> provided by developer and invoked by  developer , any number of times
+save() method
+6.destroy                  -> destroy() method  provided by developer and invoked by  Springs  1 time  (optional)
+myClose()
+  
+  
+  
+
+public class AccountService {
+
+	private String dbName;
+
+	public String getDbName() {
+		return dbName;
+	}
+
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+
+	public AccountService() {
+		System.out.println("ac obj created");
+	}
+
+	public void save() {
+		System.out.println("account- save");
+	}
+
+	public void myInit() {
+		System.out.println("in init");
+	}
+
+	public void myClose() {
+		System.out.println("close");
+	}
+}
+
+Life cycle:
+----------
+1.init-method = "init"
+2.implements InitializingBean {
+   public void afterPropertiesSet() {
+      // do some initialization work
+   }
+
+
+
+1.destroy-method = "destroy"
+2.implements DisposableBean {
+   public void destroy() {
+      // do some destruction work
+   }
+
+

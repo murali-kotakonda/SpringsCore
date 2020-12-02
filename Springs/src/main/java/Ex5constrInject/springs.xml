@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="aService" 
+	class="Ex5constrInject.AccountService">
+	 	 	<constructor-arg value="Oracle"/>
+	</bean>
+	<!-- spring create the obj for AccountService and set the "Oracle" for dbName. -->
+	
+	<bean id="uService" class="Ex5constrInject.UserService">
+		<constructor-arg value="admin"/>
+		<constructor-arg ref="aService" />
+	</bean>
+
+  <!--  For resolving obj as dependency 
+       use   ref attribute along with <constructor-arg> tag
+	 -->
+  
+  <!-- spring create the obj for UserService and set the "admin" for userName and 
+       " aService" for accountService.
+       for string/int/float/double ==> in constructor-arg use value="<value>"
+       for object                  ==> in constructor-arg use ref="<some bean id>"
+       
+       for resolving object we need to give the second bean id value to the 1st bean using
+       ref attribute.
+  -->
+	
+</beans>

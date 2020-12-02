@@ -27,10 +27,11 @@
 <a href="login.jsp">Login</a>&nbsp;&nbsp;&nbsp;
 
 <a href="registerform">Register User</a>&nbsp;&nbsp;&nbsp;
+<a href="registerform1">Register User1</a>&nbsp;&nbsp;&nbsp;
 
-<a href="session.jsp">Session1</a>
-<a href="getSessionData">Session2</a>
-<a href="deleteSessionData">Session3</a>
+<a href="session.jsp">Post Session1</a>
+<a href="getSessionData">Get Session2</a>
+<a href="deleteSessionData">Delete Session3</a>
 
 <a href="user1">Add User1</a>&nbsp;&nbsp;&nbsp;
 <a href="user2">Add User2[validation]</a>&nbsp;&nbsp;&nbsp;

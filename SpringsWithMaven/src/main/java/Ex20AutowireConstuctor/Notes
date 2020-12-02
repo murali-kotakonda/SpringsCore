@@ -1,6 +1,0 @@
-	<bean id="aService" 
-	class="autowireConstuctor.AccountService" 
-     
-     byName uses bean id="aService" for resolving dependency
-     ByType uses bean  class="autowireConstuctor.AccountService"   for resolving dependency + setter injection
-     constructor uses bean  class="autowireConstuctor.AccountService"   for resolving dependency + constr injection[ call the constr that has more no of args]

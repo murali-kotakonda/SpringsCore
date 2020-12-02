@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="myDAO" 
+			class="setterRef2.DAO">
+		<property name="userName" value="admin" />
+		<property name="password" value="admin@123" />
+	</bean>
+	
+	
+	<bean id="aService" class="setterRef2.AccountService">
+		<property name="value" value="oracle" />
+		<property name="dao" ref="myDAO" />
+	</bean>
+
+	<bean id="uService" class="setterRef2.UserService">
+		<property name="data" value="sqlserver" />
+		 <property name="dao" ref="myDAO" />
+ 	</bean>
+
+
+</beans>

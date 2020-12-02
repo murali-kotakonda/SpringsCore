@@ -1,1 +1,0 @@
-BeanPostProcessor is interface that tells Spring to do some processing after initialization some beans.

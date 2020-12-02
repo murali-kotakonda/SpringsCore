@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="uService" class="Ex10setterInject.UserService">
+	 	<property name="userName" value="system" />   <!-- this will internally calls the setUserName("system") method -->
+	 	<property name="pass" value="admin@" />  <!-- this will internally calls the setPass("admin@") method -->
+	</bean>
+
+  	<!-- spring create the obj for UserService and set the "system" for userName and "admin@" for pass.
+	  	UserService uService = new UserService();
+	  	uService.setUserName("system");
+	  	uService.setPass("admin@") ;
+  	  -->
+       
+
+	<bean id="aService" 
+	   class="Ex10setterInject.AccountService">
+	 	<property name="dbName" value="oracle" /> <!-- this will internally calls the setDbName("oracle") method -->
+	</bean>
+
+	<!-- spring create the obj for AccountService and set the "Oracle" for dbName.
+	AccountService aService = new AccountService();
+	aService.setDbName("oracle" );
+	 -->
+	 
+</beans>

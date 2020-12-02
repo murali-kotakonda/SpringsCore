@@ -1,0 +1,126 @@
+ Observations:
+---------------
+For Controller class, service obj is the dependency.
+For Service class, Helper obj is the dependency.
+For Helper class, Dao obj is the dependency.
+ 
+  
+When the consumer(developer) needs a code from the Controller  class then
+the consumer has to resolve all the dependencies.
+in this case the service obj , helper obj  and dao obj.
+dev needs to create the obj and he need to set the obj inside the patrent obj.
+
+
+Future:
+-----------
+For Dao class, SessionFactory obj as the dependency.
+again the consumer will be impacted. consumer has to create obj for SessionFactory and set inside the Dao.
+
+
+->consumer has to take the risk for resolving dependency.
+-> Cosumer has to resolve dependencies
+-> In case if any dependency is added , the consumer has to take risk to resolve the dependencies..
+-> Multi consumers who calls the method has to resolve the dependencies..
+-> Developer is not sure  how to resolve dependencis  and not sure of how many dependencies.......
+
+
+solution:
+spring offers solution using the DI/IOC concept.
+
+
+class ProductController{
+  ProductService service  = new ProductService(); // obj created every time
+}
+
+
+There are two types of classes:
+  ----------------
+  1.Pojo  -> i.v + setters + getters 
+    Business/Bean/Service/DAO/Helper   -> i.v + setters + getters  + business logic
+  
+  
+  2.Pojo obj has realtime data/ customer i/p data or cust outcome data ,REQUEST info , Response info
+    Bean objs doesnot contain relatime data
+    
+  3.Resolving dependencies is mandatory for bean objs
+  
+  4.Pojo obj has to be created for every request and for every response
+   Bean Objs should be created only one time (i.e. first request)
+    
+  5. Pojo obj  will be deleted once response is given to customer,
+  but bean objs will be available for longer duration. and are singleton objs
+    
+    
+  Problems:
+    1. To resolve chain of  dependencies for a bean object.
+    2. Maintain single obj for the bean classes through out the application.
+    
+   bean obj to be created and dependencies to be resolved and maintained by springs
+   pojo obj to be created by developers
+    
+    
+
+DI/IOC: (Dependecny Injection/ Inverse of Control)
+---------------------------------------------------------
+
+1.Springs will create the object for all the Bean classes...
+ex: ProuctController, ProductService, ProductHelper, ProductDAO
+  
+2.Springs also resolves the dependencies for every bean obj..
+
+
+3. Spring container will manage the single bean objs for every Bean class..
+Spring container contains pool of bean objs...
+
+
+4. Developer has to get the bean obj from springs and calls the respective bean methods....
+
+
+How to specify to springs what are the Bean classes?
+a) Springs.xml
+b) Annotations
+
+Springs.xml
+-----------
+->We need write a <bean> tag for very Bean class..
+-> every bean tag contains bean id and class
+
+
+<beans>
+<bean id="control" class="issue.ProductController" />
+ <bean id="service" class="issue.ProductService" />
+  <bean id="dao" class="issue.ProductDao" />
+  <bean id="helper" class="issue.ProductHelper" />
+</bean>
+
+every bean tag has bean id + class name
+
+
+Syntax for getting bean obj:
+---------------------------------
+
+1.Create applicationcontext obj using springs.xml
+2.This obj should be created only once.....
+3.using this obj develper can get any bean obj 
+
+
+
+1. Create app context obj
+ApplicationContext context = new ClassPathXmlApplicationContext("file:src/issue/springs.xml");
+
+2.get bean obj using bean id
+
+//Earlier:
+ProductController controlObj =  new ProductController();
+ProductService serviceObj =  new ProductService();
+ProductHelper helperObj  =  new ProductHelper();
+ProductDAO daoObj =  new ProductDAO();
+
+
+//Now
+ProductController controlObj = (ProductController) context.getBean("control");
+ProductService serviceObj = (ProductService) context.getBean("service");
+ProductHelper helperObj = (ProductHelper) context.getBean("helper");
+ProductDAO daoObj = (ProductDAO) context.getBean("dao");
+
+

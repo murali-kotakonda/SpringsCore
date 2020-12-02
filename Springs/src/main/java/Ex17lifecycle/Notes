@@ -1,0 +1,30 @@
+package lifecycle3
+
+how to define global init method and also kind of interceptor:
+[common init method for all bean classes ]
+
+steps:
+1.create class that implements BeanPostProcessor interface and override postProcessAfterInitialization() and postProcessBeforeInitialization().
+2.Register in springs.xml
+
+
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+public class MyBeanPostProcessor implements BeanPostProcessor {
+
+	public Object postProcessAfterInitialization(Object obj, String beanId) throws BeansException {
+		System.out.println("Inside postProcessAfterInitialization method for-" + beanId);
+		return obj;
+	}
+
+	public Object postProcessBeforeInitialization(Object obj, String beanId) throws BeansException {
+		System.out.println("Inside postProcessBeforeInitialization for-" + beanId);
+		return obj;
+	}
+}
+
+
+ 
+

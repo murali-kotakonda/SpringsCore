@@ -2,6 +2,7 @@ C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\util\E
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\RegisterForm.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\dto\Person.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\MockEmployeeController.java
+C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\UserService.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\dto\User.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\UserInfo.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\util\ErrorEnum.java
@@ -11,6 +12,5 @@ C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\Global
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\util\JDBCUtils.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\dto\Address.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\exception\EmployeeException.java
-C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\RegisterService.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\MyInterceptor.java
 C:\Murali\Training\Git\SpringsCore\SpringMvcMaven\src\main\java\com\myapp\UserController.java

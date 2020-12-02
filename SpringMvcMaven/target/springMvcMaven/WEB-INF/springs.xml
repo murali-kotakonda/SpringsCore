@@ -39,12 +39,6 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 </beans>
 
-
-
-
-
-
-
  <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
    		<property name="exceptionMappings">
       		<props>

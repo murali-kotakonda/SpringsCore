@@ -1,0 +1,198 @@
+id
+name
+SALARYINFO
+age
+dept
+city
+
+
+
+String SQL = "CREATE TABLE Student( " +
+   "ID   INT NOT NULL AUTO_INCREMENT, " +
+   "NAME VARCHAR(20) NOT NULL, " +
+   "AGE  INT NOT NULL, " +
+   "PRIMARY KEY (ID));"
+
+jdbcTemplateObject.execute( SQL );
+
+
+
+String SQL = "select * from Student where id = ?";
+Student student = jdbcTemplateObject.queryForObject(
+   SQL, new Object[]{10}, new StudentMapper());
+
+public class StudentMapper implements RowMapper<Student> {
+   public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+      Student student = new Student();
+      student.setID(rs.getInt("id"));
+      student.setName(rs.getString("name"));
+      student.setAge(rs.getInt("age"));
+      
+      return student;
+   }
+}
+
+
+
+-----------------------------------------------------------------------------------------
+SINGLE ROW :START [single row + single column]
+------------------------------------------------------------------------------------------
+
+Get count no of EmployeeInfo:
+-----------------------------
+String SQL = "select count(*) from EmployeeInfo";
+// as query retuns only number use queryForInt() method
+int rowCount = jdbcTemplateObject.queryForInt( SQL );
+
+
+Get bigger count no of employee:
+--------------------------------------------
+String SQL = "select count(*) from EmployeeInfo";
+// as query retuns only bigger number use queryForLong() method
+long rowCount = jdbcTemplateObject.queryForLong( SQL );
+
+Get the age of EmployeeInfo whose id =25:
+----------------------------------------
+String SQL = "select age from EmployeeInfo where id = ?";
+// as query retuns only number use queryForInt() method
+int age = jdbcTemplateObject.queryForInt(SQL, new Object[]{25});
+
+Get the name of employee whose id =25:
+----------------------------------------
+String SQL = "select name from EmployeeInfo where id = ?";
+// as query retuns only string use queryForObject() method by passing String.class
+String name = jdbcTemplateObject.queryForObject(SQL, new Object[]{25}, String.class);
+
+Get salary of employee using emp id
+-----------------------------------------
+String SQL ="select salaryinfo from EmployeeInfo where id=?";
+// as query retuns only Float use queryForObject() method by passing Float.class
+Float salary = jdbcTemplate.queryForObject(SQL, new Object[]{5000},Float.class);
+
+--------------------------------------------------------------------------------------------
+SINGLE ROW :END
+------------------------------------------------------------------------------------------
+
+
+
+
+#GET ALL EMPS WHO ARE WORKING FOR HR Dept
+----------------------------------------------
+long deptCount = jdbcTemplate.queryForLong("select count(*) from EmployeeInfo where dept=?", new Object[]{"HR"});
+	 
+#GET ALL EMPS WHO ARE WORKING in "hyd"
+---------------------------------------------
+long cityCount = jdbcTemplate.queryForLong("select count(*) from EmployeeInfo where city=?", new Object[]{"bangalore"});
+
+
+
+-----------------------------------------------------------------------------------------
+MULTIPLE ROW :START  :  [multiple row + single column] 
+------------------------------------------------------------------------------------------
+
+
+Get all the employee names:
+--------------------------------
+String SQL ="select name from  EmployeeInfo";
+// as query retuns multipleRows use  queryForList() method and pass String.class;
+// and the result contain only single Column of String data , Hold in List<String> variable 
+List<String> names = jdbcTemplate.queryForList(SQL, new Object[]{},String.class);
+
+
+Get all sals from employee:
+----------------------------------
+String SQL ="select salaryInfo from  EmployeeInfo";
+// as query retuns multipleRows use  queryForList() method and pass Float.class;
+// and the result contain only single Column of Float data , Hold in List<Float> variable 
+List<Float> sals = jdbcTemplate.queryForList(SQL, new Object[]{},Float.class);
+
+
+Get all empIds:
+------------------- 
+String SQL ="select id from  EmployeeInfo";
+// as query retuns multipleRows use  queryForList() method and pass Integer.class;
+// and the result contain only single Column of Integer data , Hold in List<Integer> variable 
+List<Integer> ids = jdbcTemplate.queryForList(SQL, new Object[]{},Integer.class);
+
+
+
+Get all the employee names whose salary < 5000
+--------------------------------
+String SQL ="select name from EmployeeInfo where salaryinfo < ?";
+List<String> names = jdbcTemplate.queryForList(SQL, new Object[]{5000}, String.class);
+	
+	
+Get the names of all employees matching  with 'kumar' 
+--------------------------------------------------
+String SQL = "Select name from Employee Where name like ?";
+List<String> list =jdbcTemplateObject.queryForList(SQL, new Object[]{"%kumar%"} , String.class  );
+ 
+ 
+ 
+ 
+-----------------------------------------------------------------------------------------
+MULTIPLE ROW :END  :  [multiple row + single column] 
+------------------------------------------------------------------------------------------
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Get all the dept names  from dept table 
+--------------------------------------------------
+List<String> list = jdbcTemplateObject.queryForList("Select d.dept_name from Department d ", String.class);
+  
+  
+Update employee name using emp id:
+-------------------------------------
+String query="update employee set name=? where id=?";  
+int updatedRows = jdbcTemplateObject.update (query,"shyam",1000); 
+
+Get all empNo, EmpName from Employee table:
+ ------------------------------------------------
+  public List<Map<String, Object>> queryForList_ListMap() {
+         String sql = "Select e.Emp_No, e.Emp_Name from Employee e ";
+         List<Map<String, Object>> list = 
+         jdbcTemplateObject.queryForList(sql);
+         return list;
+ }
+	
+
+
+Get deptname by deptID:
+-------------------------------	
+public String getDeptNameById(Long deptId) {
+         String sql = "Select d.Dept_Name
+          from Department d 
+        			Where d.Dept_Id = ?";
+            String deptName = 
+             jdbcTemplateObject.
+             queryForObject(sql, 
+             String.class, new Object[] { deptId });
+            return deptName;
+}
+
+
+Spring with ORM Frameworks
+Advantage of Spring with ORM
+Spring provides API to easily integrate Spring with ORM frameworks such as Hibernate, JPA(Java Persistence API), JDO(Java Data Objects), Oracle Toplink and iBATIS.
+
+Advantage of ORM Frameworks with Spring
+
+There are a lot of advantage of Spring framework in respect to ORM frameworks. There are as follows:
+
+Less coding is required: By the help of Spring framework, you don't need to write extra codes before and after the actual database logic such as getting the connection, starting transaction, commiting transaction, closing connection etc.
+Easy to test: Spring's IoC approach makes it easy to test the application.
+Better exception handling: Spring framework provides its own API for exception handling with ORM framework.
+Integrated transaction management: By the help of Spring framework, we can wrap our mapping code with an explicit template wrapper class or AOP style method interceptor.
+
+
+https://examples.javacodegeeks.com/enterprise-java/spring/jdbc/spring-transaction-management-example-with-jdbc-example/
+
+
+
+
+ 
+
