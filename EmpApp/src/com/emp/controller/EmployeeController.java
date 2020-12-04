@@ -77,9 +77,6 @@ public class EmployeeController {
 		return new ModelAndView("employeesList", model);
 	}
 
-	
-	
-
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView editEmployee(
 			@ModelAttribute("command") EmployeeBean employeeBean,

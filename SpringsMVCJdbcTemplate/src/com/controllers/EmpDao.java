@@ -25,6 +25,21 @@ public class EmpDao {
 		this.template = template;
 	}
 
+	public List<Employee> getAllEmployees() {
+		//query
+		String query = "select * from " + tableName;
+		
+		//rowMapperObj 
+		RowMapper<Employee> rowMapperObj = new RowMapper<Employee>() {
+			public Employee mapRow(ResultSet rs, int rownumber) throws SQLException {
+				return getEmployee(rs);
+			}
+		};
+		
+		//call the query method
+		return template.query(query, rowMapperObj);
+	}
+	
 	public Boolean saveEmployee(final Employee e) {
 		String query = "insert into " + tableName + " values(?,?,?,?,?)";
 		return template.update(query,
@@ -53,27 +68,26 @@ public class EmpDao {
 		return maxId ;
 	}
 	
-	public List<Employee> getAllEmployees() {
-		return template.query("select * from " + tableName, new RowMapper<Employee>() {
-			public Employee mapRow(ResultSet rs, int rownumber) throws SQLException {
-				return getEmployee(rs);
-			}
-		});
-	}
-
 	public Employee getEmpById(int id) {
-		return template.query("select * from " + tableName + " where id='" + id + "'",
-				new ResultSetExtractor<Employee>() {
-					public Employee extractData(ResultSet rs) throws SQLException, DataAccessException {
-						Employee e = null;
-						if (rs.next()) {
-							e = getEmployee(rs);
-						}
-						return e;
-					}
-				});
+		//query
+		String sql = "select * from " + tableName + " where id='" + id + "'";
+		
+       // create resultSetObj 
+		ResultSetExtractor<Employee> resultSetObj = new ResultSetExtractor<Employee>() {
+			public Employee extractData(ResultSet rs) throws SQLException, DataAccessException {
+				Employee e = null;
+				if (rs.next()) {
+					e = getEmployee(rs);
+				}
+				return e;
+			}
+		};
+		
+		//call query method
+		return template.query(sql,resultSetObj);
 	}
 
+	 //convert row to java object
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setId(rs.getInt("ID"));

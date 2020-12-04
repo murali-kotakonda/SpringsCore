@@ -17,13 +17,16 @@ public class EmpService {
 		return empDao.deleteEmployee(emp);
 	}
 
+	public Employee getEmpById(int empId) {
+		return empDao.getEmpById(empId);
+	}
+	
+	
 	public void saveEmployee(Employee employee) {
 		empDao.saveEmployee(employee);
 	}
 
-	public Employee getEmpById(int empId) {
-		return empDao.getEmpById(empId);
-	}
+	
 
 	public void updateEmployee(Employee employee) {
 		empDao.updateEmployee(employee);

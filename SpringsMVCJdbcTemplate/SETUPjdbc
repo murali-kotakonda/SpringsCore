@@ -1,0 +1,112 @@
+1. create DWP
+2. import external jars for springs mvc + springs jdbc
+3. need web.xml
+   add <servlet> for Dispatcher Servlet
+4. add springs.xml 
+add bean tag for viewResolver
+
+5.For working with springs-jdbc we need JdbcTemplate obj.
+6.spring will create the obj for JdbcTemplate.
+7.we need to write a bean tag for JdbcTemplate.
+8.For JdbcTemplate, then dependency is the data Source
+9.we need to write a bean tag for the data source.
+10.For data source you have to specify driver class name,url,password.
+
+
+
+
+
+CREATE table:
+--------------------
+name : user_Info
+
+columns:
+ID - NUMBER
+fname VARCHA2
+lname VARCHA2
+age  NUMBER
+sal  NUMBER
+
+
+
+
+
+EmployeeController depends on EmployeeService
+EmployeeService depends on EmployeeDao
+EmployeeDao  depends on  JdbcTemplate object
+
+
+
+
+EmployeeController.java:
+-------------------------------------------------
+@Controller
+public class EmployeeController {
+	
+	@Autowired
+	EmpService empService;
+  
+  
+  }
+  
+EmpService.java:
+------------------------------------------
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+ 
+
+@Service("empService")
+public class EmpService {
+	
+	@Autowired
+	EmpDao empDao;
+  
+  
+  }
+  
+  
+  
+  EmpDao.java:
+  -----------------------------------------------
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+ 
+@Repository("empDao")
+public class EmpDao {
+
+	@Autowired
+	JdbcTemplate template;
+	
+	String tableName = "user_Info";
+
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+	}
+  
+  
+  }
+  
+  
+  
+  Assignments:
+-------------
+-> spring Rest
+provide the validations for all scenarios
+
+spring with jdbc:
+-> provide edit employee funtionlity
+-> provide the validations for all scenarios
+-> search by name
+-> delete by name
