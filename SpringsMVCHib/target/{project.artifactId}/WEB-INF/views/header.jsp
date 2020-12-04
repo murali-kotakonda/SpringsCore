@@ -11,13 +11,15 @@ Welcome ${name}
 	<br><br>
 	<a href="profile?loginName=${loginName}" name="My Profile" value="My Profile">My Profile </a>&nbsp;&nbsp;&nbsp;
      
-    <a href="addEmp">Add Emp</a>&nbsp;&nbsp;&nbsp;
+    <a href="addEmp">Add Employee</a>&nbsp;&nbsp;&nbsp;
     
-    <a href="getAllEmps">Show all users</a>&nbsp;&nbsp;&nbsp;
+    <a href="getAllEmps">Show all Employee</a>&nbsp;&nbsp;&nbsp;
     
-    <a href="readUser">Search Emp</a>&nbsp;&nbsp;&nbsp;
+    <a href="getAllEmpsPagination">Show all Employee [Pagination]</a>&nbsp;&nbsp;&nbsp;
+
+    <a href="readUser">Search Employee</a>&nbsp;&nbsp;&nbsp;
     
-    <a href="deleteEmp" name="DeleteUser" value="DeleteUser">DeleteUser </a>&nbsp;&nbsp;&nbsp;
+    <a href="deleteEmp" name="DeleteUser" value="DeleteUser">Delete Employee</a>&nbsp;&nbsp;&nbsp;
     
     <a href="logout">Logout</a>&nbsp;&nbsp;&nbsp;
     <br/><br/>	

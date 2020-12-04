@@ -358,6 +358,17 @@ when we click on submit button:
 		return new ModelAndView("readDetails", "myData", resData);
 	}
 	
+	
+	@RequestMapping(value="/readPathParams/{name}/{age}/{sal}" ,
+			method = RequestMethod.GET)
+	public ModelAndView readPathParam(
+			@PathVariable("name") String userName,
+			@PathVariable("age") int age, 
+			@PathVariable("sal") float sal) {
+		String resData = "Hi " + userName + " , age = " + age + ", sal =" + sal;
+		return new ModelAndView("readDetails", "myData", resData);
+	}
+	
 	/**
 	 * @param userName
 	 * @param password

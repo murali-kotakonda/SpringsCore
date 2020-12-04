@@ -8,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	</head>
 	<body>
-	<jsp:include page="header.jsp"/>
+	<jsp:include page="header.jsp"/> <br/>
 		<h2>Add Employee Data</h2>
 		<font color="red"> ${msg }</font>
 		<form:form method="POST" action="./save" 

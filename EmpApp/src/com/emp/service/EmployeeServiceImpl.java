@@ -21,15 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.addEmployee(employee);
 	}
 
-
 	@Override
 	public EmployeeResponse listEmployeess() {
 		return employeeDao.listEmployeess();
  	}
-	
-	
-	
-	
 	
 	public EmployeeResponse listEmployeess(int pageId) {
 		return employeeDao.listEmployeess(pageId);
@@ -42,7 +37,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteEmployee(Employee employee) {
 		employeeDao.deleteEmployee(employee);
 	}
-
-
 
 }

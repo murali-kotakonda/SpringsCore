@@ -1,6 +1,9 @@
 package com.myapp.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -12,10 +15,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myapp.dto.Employee;
+import com.myapp.dto.EmployeeListResponse;
 
 @Repository("empDao")
 public class EmployeeDao {
 
+	static int resultsPerPage;
+	static Properties props;
+	
+	static {
+		String resourceName = "config.properties"; // could also be a constant
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		 props = new Properties();
+		try(InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
+		    props.load(resourceStream);
+		} catch (IOException e) {
+			
+		}
+		resultsPerPage =Integer.parseInt((String)props.get("pageSize"));
+	}
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -115,6 +133,22 @@ public class EmployeeDao {
 		long count = (Long) q.uniqueResult();
 		session.close();
 		return count >=1 ? true : false;
+	}
+	
+	public EmployeeListResponse listEmployeess(int pageId) {
+		Session sf = sessionFactory.openSession();
+		Query query2 = sf.createQuery("select count(*) from Employee");
+		long count = (Long)query2.uniqueResult();
+		
+		Query query = sf.createQuery("from Employee");
+		query.setMaxResults(resultsPerPage);
+		int fr =(pageId-1)*resultsPerPage;
+		long noOfPages = count%resultsPerPage == 0? count/resultsPerPage :(count/resultsPerPage )+1;
+		query.setFirstResult(fr);
+		List<Employee> list =(List<Employee>)  query.list();
+		sf.close();
+		
+		return  new EmployeeListResponse(list, noOfPages);
 	}
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {

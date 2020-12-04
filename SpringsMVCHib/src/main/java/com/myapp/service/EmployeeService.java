@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myapp.dao.EmployeeDao;
 import com.myapp.dto.Employee;
+import com.myapp.dto.EmployeeListResponse;
 import com.myapp.util.ErrorEnum;
 import com.myapp.util.UserException;
 
@@ -51,6 +52,10 @@ public class EmployeeService {
 	@Transactional
 	public List<Employee> getEmployees() {
 		return employeeDao.getAllEmployees();
+	}
+	
+	public EmployeeListResponse listEmployeess(int pageId) {
+		return employeeDao.listEmployeess(pageId);
 	}
 
 	@Transactional

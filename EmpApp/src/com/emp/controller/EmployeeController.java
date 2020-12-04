@@ -24,7 +24,6 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView welcome() {
@@ -37,7 +36,6 @@ public class EmployeeController {
 		return new ModelAndView("addEmployee","command",employeeBean);
 	}
 
-
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public ModelAndView saveEmployee(
 			@ModelAttribute("command") EmployeeBean employeeBean,
@@ -48,9 +46,9 @@ public class EmployeeController {
 			map.put("command", employeeBean);
 			return new ModelAndView("addEmployee",map);
 		}
+		employeeService.addEmployee(prepareModel(employeeBean));
 		return new ModelAndView("readDetails", "myData", "employee created");
 	}
-
 	
 	@RequestMapping(value = "/allEmployees", method = RequestMethod.GET)
 	public ModelAndView listEmployeesWithoutPagination() {
@@ -63,8 +61,6 @@ public class EmployeeController {
 		return new ModelAndView("employeesList", model);
 	}
 
-
-	
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
 	public ModelAndView listEmployees(
 			@RequestParam(value = "pageId", required = false, defaultValue = "1") Integer pageId) {

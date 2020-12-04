@@ -1,9 +1,10 @@
 package com.myapp.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myapp.dto.Employee;
+import com.myapp.dto.EmployeeListResponse;
 import com.myapp.service.EmployeeService;
 import com.myapp.util.EmployeeNotFoundException;
 import com.myapp.util.UserException;
@@ -189,7 +191,19 @@ public class EmployeeController {
 			return modelAndView;
 		}
 	}
-
+	
+	@RequestMapping(value = "/getAllEmpsPagination", method = RequestMethod.GET)
+	public ModelAndView listEmployees(@RequestParam(value = "pageId", 
+	required = false, defaultValue = "1") Integer pageId) {
+		EmployeeListResponse listEmployeess = employeeService.listEmployeess(pageId);
+		
+		ModelAndView modelAndView = new ModelAndView("employeesList");
+		modelAndView.addObject("emps",listEmployeess.getEmps());
+		modelAndView.addObject("count", listEmployeess.getCount());
+		
+		return modelAndView;
+	}
+	
 	@ExceptionHandler(EmployeeNotFoundException.class)
 	public ModelAndView handleEmployeeNotFoundException(HttpServletRequest request, Exception ex){
 		ModelAndView modelAndView = new ModelAndView();

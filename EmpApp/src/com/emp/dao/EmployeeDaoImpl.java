@@ -14,13 +14,14 @@ import com.emp.model.EmployeeResponse;
 @Repository("employeeDao")
 public class EmployeeDaoImpl implements EmployeeDao {
 
+	int resultsPerPage = 5;
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	public void addEmployee(Employee employee) {
-		org.hibernate.classic.Session session = 
-				sessionFactory.openSession();
-		session.getTransaction().begin();;
+		org.hibernate.classic.Session session = sessionFactory.openSession();
+		session.getTransaction().begin();
 		session.save(employee);
 		session.getTransaction().commit();
 		session.close();
@@ -32,36 +33,34 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Query query = session.createQuery("from Employee");
 		List<Employee> list = (List<Employee>)query.list();
 		session.close();
-		return  new EmployeeResponse(list, 1);
+		return  new EmployeeResponse(list, list.size());
 	}
 	
-	
-	
-	int resultsPerPage = 5;
-	@SuppressWarnings("unchecked")
 	public EmployeeResponse listEmployeess(int pageId) {
-		Session sf = sessionFactory.getCurrentSession();
+		Session sf = sessionFactory.openSession();
 		//get entire count from db
-		long count = (Long)sf.createQuery("select count(*) from Employee").uniqueResult();
+		Query query2 = sf.createQuery("select count(*) from Employee");
+		long count = (Long)query2.uniqueResult();
+		
 		Query query = sf.createQuery("from Employee");
-		//query.setMaxResults(resultsPerPage);
-		
-		
+		query.setMaxResults(resultsPerPage);
 		int fr =(pageId-1)*resultsPerPage;
 		long noOfPages = count%resultsPerPage == 0? 
 				count/resultsPerPage :(count/resultsPerPage )+1;
-		
-		//query.setFirstResult(fr);
+		query.setFirstResult(fr);
 		return  new EmployeeResponse((List<Employee>)query.list(), noOfPages);
-	//	return (List<Employee>) sessionFactory.getCurrentSession().createCriteria(Employee.class).list();
 	}
 
 	public Employee getEmployee(int empid) {
-		return (Employee) sessionFactory.getCurrentSession().get(Employee.class, empid);
+		return (Employee) sessionFactory
+				.openSession()
+				.get(Employee.class, empid);
 	}
 
 	public void deleteEmployee(Employee employee) {
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM Employee WHERE empid = "+employee.getEmpId()).executeUpdate();
+		sessionFactory.openSession()
+		.createQuery("DELETE FROM Employee WHERE empid = "+employee.getEmpId())
+		.executeUpdate();
 	}
 
 }

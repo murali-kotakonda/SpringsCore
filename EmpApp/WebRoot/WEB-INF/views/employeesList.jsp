@@ -7,9 +7,20 @@
 <title>All Employees</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"/> <br/>
 <h1>List Employees</h1>
+
 <c:if test="${!empty employees}">
+
+	<c:if test="${count>1}">
+		 Pages: 
+			<c:forEach var = "i" begin = "1" end = "${count}">
+          		<a href='employees.html?pageId=${i}'> ${i} </a> &nbsp;
+    		</c:forEach>
+	</c:if>	
+		
+		<br/><br/>
+		
 	<table align="left" border="1">
 		<tr>
 			<th>Employee ID</th>
@@ -31,14 +42,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<br/>	<br/><br/><br/><br/><br/><br/>
-	<c:if test="${count>1}">
-		<h4>Pages: 
-			<c:forEach var = "i" begin = "1" end = "${count}">
-          		<a href='employees.html?pageId=${i}'><c:out value = "${i}"/></a>
-    		</c:forEach>
-    	</h4>
-	</c:if>	
+	
     
 </c:if>
 </body>

@@ -1,4 +1,5 @@
 com\myapp\dao\EmployeeDao.class
+com\myapp\dto\EmployeeListResponse.class
 com\myapp\controllers\EmployeeController.class
 com\myapp\dto\Info.class
 com\myapp\exception\EmployeeException.class

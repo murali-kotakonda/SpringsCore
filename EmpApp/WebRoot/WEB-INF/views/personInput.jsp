@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/> <br/>
 
 <H2> Get Form</H2> <br/>
 <form action="./person" method="get">
