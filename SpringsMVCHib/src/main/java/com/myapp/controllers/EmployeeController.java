@@ -192,9 +192,15 @@ public class EmployeeController {
 		}
 	}
 	
+	/**
+	  pageSize: 5
+	every time when customer works on "getAllEmpsPagination" url the results should be retrieved based
+	-> page size
+	-> page number
+
+	 */
 	@RequestMapping(value = "/getAllEmpsPagination", method = RequestMethod.GET)
-	public ModelAndView listEmployees(@RequestParam(value = "pageId", 
-	required = false, defaultValue = "1") Integer pageId) {
+	public ModelAndView listEmployees(@RequestParam(value = "pageId", required = false, defaultValue = "1") Integer pageId) {
 		EmployeeListResponse listEmployeess = employeeService.listEmployeess(pageId);
 		
 		ModelAndView modelAndView = new ModelAndView("employeesList");

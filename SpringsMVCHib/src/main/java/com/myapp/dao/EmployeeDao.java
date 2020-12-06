@@ -135,6 +135,20 @@ public class EmployeeDao {
 		return count >=1 ? true : false;
 	}
 	
+	/**
+	Where should we specify the page file?
+	-> in configuration file like .properties
+	
+	
+	1.Provide a config.properties
+	
+	config.properties
+	-------------------------------
+	pageSize=5
+	
+	EmployeeDao has to read the propeties file and fetch the value for  "pageSize"
+
+	 */
 	public EmployeeListResponse listEmployeess(int pageId) {
 		Session sf = sessionFactory.openSession();
 		Query query2 = sf.createQuery("select count(*) from Employee");

@@ -15,7 +15,7 @@ Welcome ${name}
     
     <a href="getAllEmps">Show all Employee</a>&nbsp;&nbsp;&nbsp;
     
-    <a href="getAllEmpsPagination">Show all Employee [Pagination]</a>&nbsp;&nbsp;&nbsp;
+    <a href="getAllEmpsPagination">Show all Employees [Pagination]</a>&nbsp;&nbsp;&nbsp;
 
     <a href="readUser">Search Employee</a>&nbsp;&nbsp;&nbsp;
     

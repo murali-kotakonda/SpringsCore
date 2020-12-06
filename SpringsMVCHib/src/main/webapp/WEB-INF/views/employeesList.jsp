@@ -15,7 +15,7 @@
 	<c:if test="${ count gt 1}">
 		 Pages: 
 			<c:forEach var = "i" begin = "1" end = "${count}">
-          		<a href='getAllEmpsPagination?pageId=${i}'> ${i} </a> &nbsp;
+          		<a href='getAllEmpsPagination?pageId=${i}'>${i}</a> &nbsp;
     		</c:forEach>
 	</c:if>	
 		
