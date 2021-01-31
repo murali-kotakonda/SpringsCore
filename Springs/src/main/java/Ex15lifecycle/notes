@@ -1,3 +1,25 @@
+
+without spring:
+---------------
+1.load class   -> JRE
+2.create obj    -> Dev
+  -> call constructor  -> Dev
+  -> call setter methods -> Dev
+3.using obj call methods -> Dev
+4.delete objs - Gargabe collection
+
+with springs:
+------------------------------------
+1.loading class - spring + JRE
+2.create object  - spring
+3.resolve the dependencies - spring
+  -> call constructor  -> spring
+  -> call setter methods -> spring
+4.initialization  - spring
+5.service method execution - Dev
+6.destroy [delete obj ] - spring + delete objs 
+
+
 life-cycle of spring bean objects:
 ------------------------------------
 1.loading class 

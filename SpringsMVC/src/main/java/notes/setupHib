@@ -43,7 +43,7 @@ client makes a call to backend by clciking on link or by clicking on buton or aj
   </form>
   
   
-for every action on the page  we have the url:
+for every feature/action on the page  we have the url:
 
 ex: 
 
@@ -82,8 +82,10 @@ when the client makes a call to the backend , client has to specify
 1.<base_url>/ResouceUrl  
 2.Http method  (Specifies the resaon for making call) -> GET, POST, PUT, DELETE  etc...
 if httpmethod is not specified by default its is considered as GET
+3.Request data , cookies 
 
-  URL                            											HTTP_METHOD                            purpose
+  URL                            								    HTTP_METHOD                                  purpose
+  ----------------------------------------------------------------------------------------------------------------------------------
   http://localhost:8080/MyApp/Employee							    POST										create the emp 
   http://localhost:8080/MyApp/Employee							    PUT											update the emp 
   http://localhost:8080/MyApp/Employee							    GET											read the emp 
@@ -96,19 +98,18 @@ if httpmethod is not specified by default its is considered as GET
  
 
  All the Link calls the HTTP_METHOD is always GET.
-
+->For a button it can be get/post/put/delete
 
  Assume we have a web application 'MyApp' running at the url 'http://localhost:8080/MyApp'.
   
- 1.    
+Case#1.    
  <a href="register">click here</a> 
  the href attribute contains either "resouce_url" or any external link or any html/jsp page name
  
  here URL :  http://localhost:8080/MyApp/register
       HTTP_method : GET
    
-2.  For a button click the htt_method can be GET OR POST OR Delete or PUT
-ex1:
+Case#2.  For a button click the htt_method can be GET OR POST OR Delete or PUT
 <form action="search" method ="post">
 	<input type ="submit" name="submit" value="register">
 </form>
@@ -116,7 +117,7 @@ ex1:
 here URL :  http://localhost:8080/MyApp/search
 HTTP_method : post
           
- ex2:
+Case#3:
 <form action="search">
 	    <input type ="submit" name="submit" value="register">
  	 </form>
@@ -124,7 +125,7 @@ HTTP_method : post
  HTTP_method : GET
  
           
- ex3:
+Case#4:
 <form action="search" method ="GET" >
 <input type ="submit" name="submit" value="register">
 </form>
@@ -132,7 +133,7 @@ HTTP_method : post
 here URL :  http://localhost:8080/MyApp/search
 HTTP_method : GET
 
-ex4:
+Case#5:
 <form action="search" method ="DELETE" >
  <input type ="submit" name="submit" value="register">
 </form>

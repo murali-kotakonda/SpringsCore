@@ -1,0 +1,66 @@
+springs with hib:
+---------------------
+
+we need 3 types of business classes:
+1.controller   -> Spring mvc code
+2.service      -> busines logic , validation , throw exception
+3.dao          -> hibernate code
+
+for all above classes, objs are created by springs.
+
+pojo classes:
+--------------
+entity class
+response dto
+request dto
+form class
+
+for all above classes, objs are created by dev using springs 
+
+util:
+-----
+ErrorEnum   -> class maintains all the error code + error message
+
+add new error or any change in the error msg + error code in future refer only the ErrorEnum.java
+
+exception:
+-------------
+for custom exception to handle the negative scenarios in project
+
+Flow:
+---------
+
+UI ------> EmployeeController    ------> EmployeeService  -----> EmployeeDao ----->  Database
+
+
+
+
+How do a Business class   pass the data or receive the data from the another Business class?
+ans)
+using the objects (dto/entity/request/response) 
+
+
+
+In controller:
+------------------
+
+for every url we need to write a controller method
+
+
+For controller method use the annotations:
+--------------------------------------------
+@RequestMapping(value = "", method = RequestMethod.POST)
+@RequestParam("id")   -> get single  req data
+@ModelAttribute("employee") -> get all  req data in the form of obj
+@Valid -> to perfom validation using hibernate-validator framework
+
+
+
+
+
+
+when login is succes save the customer basic info in the session
+during the  logout delete the customer basic info from the session
+
+
+

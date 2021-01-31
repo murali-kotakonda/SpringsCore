@@ -148,6 +148,40 @@ public class EmployeeDao {
 	
 	EmployeeDao has to read the propeties file and fetch the value for  "pageSize"
 
+	Pagination:
+	-------------------
+	url is same for "show all employees" and all pageNumbers but the
+	pageId is different
+	
+	
+	"pageId" is mandatory param , if you dont pass , the default value is 1.
+	the page size we need to read from properties file
+	the logic to read the page size is written in the EmployeeDao.java , under static block
+	
+	How to find the number of pages:
+	-----------------------------------------
+	1.In the database we have 29 records
+	page size is 5
+	then find the number of page??
+	long noOfPages = noOfRecords%resultsPerPage == 0? noOfRecords/resultsPerPage :(noOfRecords/resultsPerPage )+1;
+		
+		
+	no of records:29 
+	records, page size:5
+	no of pages :6
+	
+	#page 1 print from  FirstRecord :0  to 4  
+	#page 2 print from FirstRecord :5  to 9
+	#page 3 print from FirstRecord :10  to 14
+	#page 4 print from FirstRecord :15  to 19
+	#page 5 print from FirstRecord :20 to 24
+	#page 6 print from FirstRecord :25 to 28
+
+	i/p:
+	pageNo : 5
+	find the firstRecord
+	(pageNo -1) * pageSize
+
 	 */
 	public EmployeeListResponse listEmployeess(int pageId) {
 		Session sf = sessionFactory.openSession();

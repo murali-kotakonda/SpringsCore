@@ -1,0 +1,206 @@
+   
+package: ConstrObjmap 
+
+EmployeeController has map as dependency .
+map has String as key and 'Config' obj  as value
+ 
+ Config.java:
+ ----------------------------
+ public class Config{
+    String path; 
+	
+	public Config(String path){
+	 this.path = path;
+	}
+ }
+ 
+ 
+ EmployeeController.java:
+ ----------------------------------
+ public class EmployeeController{
+    
+	//instance varible
+	Map<String,Config> map1;
+	
+	
+	//constr
+	public EmployeeController(Map<String, Config> props) {
+		this.props = props;
+	}
+    
+	public void process() {
+	
+	//iterate the map 
+	for(Entry<String,String> entry : map1.entrySet()){
+	        System.out.println(entry.getKey());
+    		Config c = entry.getValue();
+			System.out.println(c.path);
+	}
+	}
+  
+ }
+
+
+Req:
+add 3 config objs to the map
+add map to the empController obj
+
+springs.xml:
+----------------
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<bean id ="config1"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="test" />
+</bean>
+
+<bean id ="config2"  class= "ConstrObjmap.Config"> 
+    <constructor-arg value="dev" />
+</bean>
+
+<bean id ="config3"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="prod" />
+</bean>
+
+
+
+
+<bean id ="empController"  class= "ConstrObjmap.EmployeeController">
+      <constructor-arg>
+	       <map >
+			       <entry key="env1" ref="config1" />    
+				   <entry key="env2" ref="config2" />
+				   <entry key="env3" ref="config3" />
+			  </map >
+	  
+	  </constructor-arg>
+
+</bean> 
+
+
+
+</beans>
+
+
+
+
+meaning of  configuration:
+-------------------------------------------------------
+<bean id ="config1"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="test" />
+</bean>
+
+<bean id ="config2"  class= "ConstrObjmap.Config"> 
+    <constructor-arg value="dev" />
+</bean>
+
+<bean id ="config3"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="prod" />
+</bean>
+
+
+//create 3 config objs 
+Config config1 = new Config("test");
+Config config2 = new Config("dev");
+Config config3 = new Config("prod");
+
+
+
+meaning of  configuration:
+-----------------------------
+<bean id ="config1"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="test" />
+</bean>
+
+<bean id ="config2"  class= "ConstrObjmap.Config"> 
+    <constructor-arg value="dev" />
+</bean>
+
+<bean id ="config3"  class= "ConstrObjmap.Config"> 
+     <constructor-arg value="prod" />
+</bean>
+
+<bean id ="empController"  class= "ConstrObjmap.EmployeeController">
+      <constructor-arg>
+	       <map >
+			       <entry key="env1" ref="config1" />    
+				   <entry key="env2" ref="config2" />
+				   <entry key="env3" ref="config3" />
+			  </map >
+	  
+	  </constructor-arg>
+
+</bean> 
+
+</bean> 
+
+//create 3 config objs 
+Config config1 = new Config("test");
+Config config2 = new Config("dev");
+Config config3 = new Config("prod");
+
+
+//create a map and keep 3 objs inside the map 
+Map<String,Config> map1 = new HashMap<>();
+map1.put("env1", config1); //<entry key="env1" ref="config1" />   
+map1.put("env2", config2); //<entry key="env2" ref="config2" />
+map1.put("env3", config3); //<entry key="env3" ref="config3" />
+
+//create the EmployeeController obj by passing map1 to the constrcutor
+EmployeeController empController = new EmployeeController(map1);
+
+
+TestEmpController:
+-------------------------
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TestEmpController{
+
+public static void main(String[] args) {
+		//get context obj
+		ApplicationContext context =new ClassPathXmlApplicationContext("file:src/main/java/ConstrObjmap/springs.xml");
+		
+		
+		EmployeeController ec = (EmployeeController)context.getBean("empController");
+        ec.process();
+
+}
+}
+
+
+tags in springs.xml:
+-------------------------------
+ 
+6.  if the dependency is Map<String,Employee> map2;
+	 
+	  <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	   
+ - For constr injection:
+	     <constructor-arg>
+	          <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+	  
+	    </constructor-arg>
+  - For setter injection :	 
+	 <property name="map2" >
+              <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+     </property>
+	 

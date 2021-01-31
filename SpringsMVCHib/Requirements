@@ -83,7 +83,7 @@ Under My profile
 "Change password" screen contains:
 old pass:
 new pass:
-conirm pass:
+confirm pass:
    Change password button
    
  
@@ -95,7 +95,7 @@ edit employee -> updates other profiles
    
 Req 2:[Add new column userType ]
 --------------------------------------------
-- In the aplciation there are two types of users
+- In the applciation there are two types of users
 1.admin  
 2.user
 
@@ -209,7 +209,7 @@ Req. 09
 -> By default during "registration" / "add new user" save the attempts value as ZERO (0).      
 -> if user enters correct user but wrong password exactly five time, account should be locked.
     
-     ex:	
+ex:	
 	 There is a user with "Kumar" as loginname , "Kumar" as password:
        
  case1:

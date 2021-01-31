@@ -1,0 +1,353 @@
+   
+package: Constrmap 
+
+EmployeeController has map as dependency .
+map has String as key and String as value
+ 
+ EmployeeController.java:
+ ----------------------------------
+ public class EmployeeController{
+    
+	//instance varible
+	Map<String,String> map1;
+	
+	
+	//constr
+	public EmployeeController(Map<String, String> props) {
+		this.props = props;
+	}
+    
+	public void process() {
+	
+	//iterate the map 
+	for(Entry<String,String> entry : map1.entrySet()){
+	        System.out.println(entry.getKey());
+    		System.out.println(entry.getValue());
+	}
+	}
+  
+ }
+
+
+
+springs.xml:
+----------------
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+<bean id ="empController"  class= "Constrmap.EmployeeController">
+      <constructor-arg>
+	       <map >
+			       <entry key="id" value="20000" />    
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+	  
+	  </constructor-arg>
+
+
+
+</bean> 
+
+
+
+</beans>
+
+
+
+
+meaning of  configuration:
+-------------------------------------------------------
+ <map >
+	<entry key="id" value="20000" />    
+	<entry key="name" value="kumar" />
+	<entry key="age" value="34" />
+</map >
+
+
+Map<String,String> map1 = new HashMap<>();
+map1.put("id", "20000"); //<entry key="id" value="20000" />   
+map1.put("name", "kumar"); //<entry key="name" value="kumar" />
+map1.put("age", "34"); //<entry key="age" value="34" />
+
+
+
+meaning of  configuration:
+-----------------------------
+<bean id ="empController"  class= "Constrmap.EmployeeController">
+      <constructor-arg>
+	       <map >
+			       <entry key="id" value="20000" />    
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+	  
+	  </constructor-arg>
+
+</bean> 
+
+//create a map with data
+Map<String,String> map1 = new HashMap<>();
+map1.put("id", "20000"); //<entry key="id" value="20000" />   
+map1.put("name", "kumar"); //<entry key="name" value="kumar" />
+map1.put("age", "34"); //<entry key="age" value="34" />
+
+//create the EmployeeController obj by passing map1 to the constrcutor
+EmployeeController empController = new EmployeeController(map1);
+
+
+TestEmpController:
+-------------------------
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TestEmpController{
+
+public static void main(String[] args) {
+		//get context obj
+		ApplicationContext context =new ClassPathXmlApplicationContext("file:src/main/java/Constrmap/springs.xml");
+		
+		
+		EmployeeController ec = (EmployeeController)context.getBean("empController");
+        ec.process();
+
+
+}
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Config.java:
+--------------------
+ class Config{
+ }
+ 
+ 
+
+tags in springs.xml:
+-------------------------------
+
+1.if the dependency is primitive datatype[int/short/long/float/double/char/String] then :
+  - For constr injection:
+	  <constructor-arg value="kumar">
+  - For setter injction :	 
+	 <property name="name" value="kumar" />
+ 			 
+
+2.if the dependency is Object 
+   - For constr injection:
+	  <constructor-arg ref="daoImpl">
+  - For setter injction :	 
+	 <property name="dao" ref="daoImpl" /> 
+	 
+	 
+3.	 if the dependency is List<String> 
+    - For constr injection:
+	  <constructor-arg>
+	         <list>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</list>
+	  
+	  </constructor-arg>
+  - For setter injction :	 
+	 <property name="names" >
+           <list>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</list>
+     </property>	 
+	 
+
+4.	 if the dependency is   List<Employee> emps;
+
+       <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	  - For constr injection:
+	  <constructor-arg>
+	         <list>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</list>
+	  
+	  </constructor-arg>
+  - For setter injection :	 
+	 <property name="emps" >
+            <list>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</list>
+     </property>
+	 
+	 
+
+5.	 if the dependency is   Map<String,String> map1;
+        
+	 - For constr injection:
+	     <constructor-arg>
+	          <map >
+			       <entry key="id" value="20000" />
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+	  
+	    </constructor-arg>
+  - For setter injection :	 
+	 <property name="map1" >
+             <map >
+			       <entry key="id" value="20000" />
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+     </property>
+	 
+	 
+	 
+
+6.  if the dependency is Map<String,Employee> map2;
+	 
+	  <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	   
+ - For constr injection:
+	     <constructor-arg>
+	          <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+	  
+	    </constructor-arg>
+  - For setter injection :	 
+	 <property name="map2" >
+              <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+     </property>
+	 
+
+
+
+
+
+
+
+	 
+7.	 if the dependency is Set<String> 
+    - For constr injection:
+	  <constructor-arg>
+	         <set>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</set>
+	  
+	  </constructor-arg>
+  - For setter injction :	 
+	 <property name="names1" >
+           <set>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</set>
+     </property>	 
+	 
+
+8.	 if the dependency is   Set<Employee> emps;
+
+       <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	  - For constr injection:
+	  <constructor-arg>
+	         <set>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</set>
+	  
+	  </constructor-arg>
+  - For setter injection :	 
+	 <property name="emps1" >
+            <set>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</set>
+     </property>
+	 
+	 
+
+
+

@@ -1,0 +1,236 @@
+dependencies for a business class:
+----------------------------------------
+-> String/int/float/boolean (primitive)
+-> Object (Employee Dao)
+-> Collection
+   list of String/int/float/boolean (primitive)
+   list of Object (Employee Dao)
+   Map of String/int/float/boolean (primitive)
+   Map of Object (Employee Dao)
+
+the instance variable for a class can be any data type
+   
+ class EmployeeDao{
+ }  
+   
+ class Config{
+ }
+ 
+ class EmployeeController{
+ 
+  int id
+  String name;
+
+  EmployeeDao dao;
+
+  List<String> names ;    
+  List<Integer> nums ;
+  List<Employee> emps;
+  
+  Set<String> names1 ;    
+  Set<Integer> nums1 ;
+  Set<Employee> emps1;
+  
+  Map<String,String> map1;
+  Map<String,Employee> map2;
+  
+ }
+
+
+
+tags in springs.xml:
+-------------------------------
+
+1.if the dependency is primitive datatype[int/short/long/float/double/char/String] then :
+  - For constr injection:
+	  <constructor-arg value="kumar">
+  - For setter injction :	 
+	 <property name="name" value="kumar" />
+ 			 
+
+2.if the dependency is Object 
+   - For constr injection:
+	  <constructor-arg ref="daoImpl">
+  - For setter injction :	 
+	 <property name="dao" ref="daoImpl" /> 
+	 
+	 
+3.	 if the dependency is List<String> 
+    - For constr injection:
+	  <constructor-arg>
+	         <list>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</list>
+	  
+	  </constructor-arg>
+  - For setter injction :	 
+	 <property name="names" >
+           <list>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</list>
+     </property>	 
+	 
+
+4.	 if the dependency is   List<Employee> emps;
+
+       <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	  - For constr injection:
+	  <constructor-arg>
+	         <list>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</list>
+	  
+	  </constructor-arg>
+  - For setter injection :	 
+	 <property name="emps" >
+            <list>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</list>
+     </property>
+	 
+	 
+
+5.	 if the dependency is   Map<String,String> map1;
+        
+	 - For constr injection:
+	     <constructor-arg>
+	          <map >
+			       <entry key="id" value="20000" />
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+	  
+	    </constructor-arg>
+  - For setter injection :	 
+	 <property name="map1" >
+             <map >
+			       <entry key="id" value="20000" />
+				   <entry key="name" value="kumar" />
+				   <entry key="age" value="34" />
+			  </map >
+     </property>
+	 
+	 
+	 
+
+6.  if the dependency is Map<String,Employee> map2;
+	 
+	  <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	   
+ - For constr injection:
+	     <constructor-arg>
+	          <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+	  
+	    </constructor-arg>
+  - For setter injection :	 
+	 <property name="map2" >
+              <map >
+			       <entry key="e1" ref="emp1" />
+				   <entry key="e2" ref="emp2" />
+				   <entry key="e3" ref="emp3" />
+			  </map >
+     </property>
+	 
+
+
+
+
+
+
+
+	 
+7.	 if the dependency is Set<String> 
+    - For constr injection:
+	  <constructor-arg>
+	         <set>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</set>
+	  
+	  </constructor-arg>
+  - For setter injction :	 
+	 <property name="names1" >
+           <set>
+				<value>testsys1</value>
+				<value>testsys2</value>
+				<value>sandbox</value>
+				<value>dbsys</value>
+				<value>server</value>
+				<value>live</value>
+			</set>
+     </property>	 
+	 
+
+8.	 if the dependency is   Set<Employee> emps;
+
+       <bean id="emp1" class="Employee"/>
+	   <bean id="emp2" class="Employee"/>
+	   <bean id="emp3" class="Employee"/>
+	   <bean id="emp4" class="Employee"/>
+	   <bean id="emp5" class="Employee"/>
+	   
+	   
+	  - For constr injection:
+	  <constructor-arg>
+	         <set>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</set>
+	  
+	  </constructor-arg>
+  - For setter injection :	 
+	 <property name="emps1" >
+            <set>
+				 <ref bean="emp1"/>
+				 <ref bean="emp2"/>
+				 <ref bean="emp3"/>
+				 <ref bean="emp4"/>
+				 <ref bean="emp5/>
+			</set>
+     </property>
+	 
+	 
+
+
+

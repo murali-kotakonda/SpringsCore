@@ -1,1 +1,75 @@
 BeanPostProcessor is interface that tells Spring to do some processing after initialization some beans.
+
+
+ BeanPostProcessor interface :
+ --------------------------
+ do we need to handle any global level initialization?
+ Yes , use BeanPostProcessor
+ refer Ex17
+ the init logic is applied for all the objects maintained by springs
+ 
+ do we need to handle only specific initialization?
+ Yes , 
+ refer Ex15 [uses init-method="myInit" destroy-method="myClose" in springs.xml]
+ refer Ex16 [use InitializingBean and DisposableBean]
+ 
+ 
+ 
+ 
+with springs using BeanPostProcessor
+------------------------------------
+1.loading class - spring + JRE
+2.create object  - spring
+
+3.resolve the dependencies - spring
+  -> a)call constructor  -> spring
+  -> b) call setter methods -> spring
+
+4. call the postProcessBeforeInitialization() method in MyBeanPostProcessor
+5.initialization  - spring
+6. call the postProcessAfterInitialization() method in MyBeanPostProcessor
+
+7.service method execution - Dev
+8.destroy [delete obj ] - spring + Gargabe collection 
+  
+ 
+ 
+with springs without using BeanPostProcessor
+------------------------------------
+1.loading class - spring + JRE
+2.create object  - spring
+
+3.resolve the dependencies - spring
+  -> a)call constructor  -> spring
+  -> b) call setter methods -> spring
+
+4.initialization  - spring
+
+5.service method execution - Dev
+6.destroy [delete obj ] - spring + Gargabe collection 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ for multi obejcts:
+-------------------
+ApplicationContext context = new ClassPathXmlApplicationContext("file:src/main/java/Ex17lifecycle/springs.xml");
+
+Repeat the following steps for all objects
+1.loading class - spring + JRE
+2.create object  - spring
+
+3.resolve the dependencies - spring
+  -> a)call constructor  -> spring
+  -> b) call setter methods -> spring
+
+4. call the postProcessBeforeInitialization() method in MyBeanPostProcessor
+5.initialization  - spring
+6. call the postProcessAfterInitialization() method in MyBeanPostProcessor
+
+
+after  above steps are repeated then only call the service methods/
+ 
