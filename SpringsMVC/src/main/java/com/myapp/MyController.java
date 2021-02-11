@@ -298,7 +298,7 @@ Every query param is seperated by  &
 For generic data submission use GET call.
 CANNOT USE FOR SENSITIVE DATA SUBMISISON.
 Cannot handle large data. 
-All the link calls ae get calls
+All the link calls are get calls
 
 Button call can be wither get or post call
 
@@ -307,7 +307,7 @@ input data is part of request body.
 EX: http:/localhost:7189/SpringsMVC2/register
 For secure data transfer use POST call. 
 Can handle large data.
-File uploads/image  upoad should be done using post calls.
+File uploads/image  upLoad should be done using post calls.
 */   
 	
 	/**
