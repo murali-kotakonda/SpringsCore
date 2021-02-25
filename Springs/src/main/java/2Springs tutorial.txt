@@ -1,4 +1,51 @@
 
+Framework:
+-----------
+- is a external lib
+- contains the pre-written code
+- is available in the form of jar files.
+- jar- --> contains multiple .class files
+- contains solution for common prblms which we face in projects.
+ex:
+hibernate
+springs
+spring boot
+spring rest
+spring mvc
+Jpa
+
+
+adv:
+--------
+- fast devlopment
+- minimal coding + configuration
+- 
+
+
+syllabus:
+-----------
+Hibernate
+springs core/di
+spring jdbc
+spring mvc
+spring rest
+maven
+sql/oracle
+html/jsp
+spring boot
+
+integrations:
+spring mvc + hibernate
+spring mvc + springs jdbc
+
+
+spring boot + springs jdbc
+spring boot + JPA
+
+workshop project
+resume project
+
+
 
 Springs framework:
 -----------------------------
