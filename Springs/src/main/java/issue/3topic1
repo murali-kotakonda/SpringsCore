@@ -117,10 +117,14 @@ ProductHelper helperObj  =  new ProductHelper();
 ProductDAO daoObj =  new ProductDAO();
 
 
-//Now
+
+
+//Now [using the bean id get the bean object]
 ProductController controlObj = (ProductController) context.getBean("control");
 ProductService serviceObj = (ProductService) context.getBean("service");
 ProductHelper helperObj = (ProductHelper) context.getBean("helper");
 ProductDAO daoObj = (ProductDAO) context.getBean("dao");
+
+
 
 

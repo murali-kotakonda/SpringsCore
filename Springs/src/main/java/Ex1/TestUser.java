@@ -1,13 +1,12 @@
 package Ex1;
 
-import java.util.Scanner;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestUser {
 
 	public static void main(String[] args) {
+		//get the context object
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:src/main/java/Ex1/springs.xml");
 
 		UserService uServiceObj = (UserService) context.getBean("userServiceObj");

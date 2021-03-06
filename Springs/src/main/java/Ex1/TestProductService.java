@@ -22,9 +22,9 @@ Now
 -----------------------
 Req:
 	Dev has to register ProductService.java in springs.xml
-	spring has to create oj for ProductService
-	Dev has to get the obj form springs
-	dev has to call the getAllProducts()
+	spring has to create obj for ProductService
+	Dev has to get the obj from springs
+	dev has to call the getAllProducts() method
 
  */
 public class TestProductService {

@@ -49,6 +49,10 @@ Spring will resolve dependencies  using:
   
                         
 
+Req:  
+  AccountService has "dbName" as dependency.
+ 
+ 
  setter injection :
  ------------------------------------------------------------------------------------------------
  1.Change in java class
@@ -90,7 +94,7 @@ what data spring should set is decided by developed.
    		<property name="dbName" value="oracle" />
    </bean>
    
-        AccountService aService = new AccountService();
+      AccountService aService = new AccountService();
      aService.setDbName("oracle");
 
 
@@ -136,3 +140,9 @@ what data spring should set is decided by developer.
     </bean>
     
     UserService uService = new UserService("system", "user@1234");
+    
+    
+    
+    
+    
+    

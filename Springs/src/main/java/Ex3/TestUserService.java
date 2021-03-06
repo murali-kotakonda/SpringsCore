@@ -43,7 +43,7 @@ public class TestUserService {
 		System.out.println("enter gender");
 		String gender = sc.next();
 
-		// keep input data in user obje
+		// keep input data in user obj
 		User user = new User(name, mobile, gender);
 		
 		// get context obj
