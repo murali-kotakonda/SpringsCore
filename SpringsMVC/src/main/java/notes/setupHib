@@ -33,7 +33,7 @@ server : Java back end
 
 both client and server should know the HTTP protocol.
 
-client makes a call to backend by clciking on link or by clicking on buton or ajax calls.
+client makes a call to backend by clicking on link or by clicking on button or ajax calls.
 
 1.link      -> <a href="<url here>">Link</a>
 2.button   -> 
@@ -46,7 +46,6 @@ client makes a call to backend by clciking on link or by clicking on buton or aj
 for every feature/action on the page  we have the url:
 
 ex: 
-
 http://localhost:8080/MyApp           -> base url
 http://localhost:8080/MyApp/comments  > resouce url: /comments 
 http://localhost:8080/MyApp/Post     -> > resouce url: /Post
@@ -65,7 +64,7 @@ localhost: -> the ip address where the application is running.
 			http://localhost:8080/gmail
 
 MyApp/youtube/gmail -> its the applciation name.
-resouce url -> specifies the action to be perfomed by the applciation.
+resouce url -> specifies the action to be performed by the applciation.
   
 
 once the app is deployed to the live then 
@@ -79,10 +78,13 @@ DNS -> Domain Naming Server will take care of converting domain names to the Bas
 
   
 when the client makes a call to the backend , client has to specify 
-1.<base_url>/ResouceUrl  
+1.<base_url>  + ResouceUrl  
 2.Http method  (Specifies the resaon for making call) -> GET, POST, PUT, DELETE  etc...
 if httpmethod is not specified by default its is considered as GET
 3.Request data , cookies 
+
+can we use same url for different tasks/operations?
+Yes
 
   URL                            								    HTTP_METHOD                                  purpose
   ----------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +97,6 @@ if httpmethod is not specified by default its is considered as GET
   If client doesnt not specifies the URL properly  ---> page not found 404 is reported
   If client doesnt not specifies the http method --->  by  default it is considered as "GET".
  
- 
 
  All the Link calls the HTTP_METHOD is always GET.
 ->For a button it can be get/post/put/delete
@@ -106,7 +107,7 @@ Case#1.
  <a href="register">click here</a> 
  the href attribute contains either "resouce_url" or any external link or any html/jsp page name
  
- here URL :  http://localhost:8080/MyApp/register
+ here URL :http://localhost:8080/MyApp/register
       HTTP_method : GET
    
 Case#2.  For a button click the htt_method can be GET OR POST OR Delete or PUT

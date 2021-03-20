@@ -4,8 +4,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
-	<bean id="aService" 
-	class="Ex5constrInject.AccountService">
+	<bean id="aService"  class="Ex5constrInject.AccountService">
 	 	 	<constructor-arg value="Oracle"/>
 	</bean>
 	<!-- spring create the obj for AccountService and set the "Oracle" for dbName. -->

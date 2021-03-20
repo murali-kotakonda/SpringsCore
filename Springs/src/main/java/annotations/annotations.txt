@@ -16,15 +16,6 @@ public class MainApp {
 }
 
 
-@Configuration
-public class HelloWorldConfig {
-    @Bean(initMethod = "init", destroyMethod = "cleanup" )
- @Scope("prototype")
-   public HelloWorld helloWorld(){
-      return new HelloWorld();
-   }
-}
-
 
 public static void main(String[] args) {
    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();

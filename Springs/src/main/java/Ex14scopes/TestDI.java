@@ -1,7 +1,5 @@
 package Ex14scopes;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
 Req:
@@ -9,6 +7,10 @@ Req:
 	for UserService provide scope as prototype
 	exhibit the behaviour of getBean() method
  */
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class TestDI {
 	public static void main(String[] args) {
 		//get context object

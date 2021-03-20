@@ -6,25 +6,22 @@ Springs JDBC:[for database connectivity ]
 
 problems of JDBC API
 --------------------------
-- lot of code before and after executing
- the query, such as creating connection,
+- lot of code before and after executing  the query, such as creating connection,
   statement, closing resultset, connection etc.
 - exception handling is mandatory on the database logic.
 - handle transaction.
-- boiler plate code
+- boiler plate code [code repeation]
 - we need statement + connection obj + resultset obj + Callablestatement etc...
 
 Spring JDBC
 -------------
 -allows to clean-up the resources automatically, 
 e.g. release the database connections.
-- converts the standard JDBC SQLExceptions into
- RuntimeExceptions.
--JDBC template converts also the vendor 
- specific error messages into 
- better understandable error messages.
- - need only the jdbctemplate obj
+- converts the standard JDBC SQLExceptions into  RuntimeExceptions.
  -exception handling is optional
+-JDBC template converts also the vendor  specific error messages into  better understandable error messages.
+ - need only the jdbctemplate obj
+
 - has inbuilt methods for mapping rows to the java layer.
 
 TABLE: EmployeeInfo 
@@ -34,9 +31,7 @@ ID- Number,
 NAME- varchar,
 SALARYINFO - Number
 
-
-
-
+ 
 Java setup:
 -----------
 1.create java project

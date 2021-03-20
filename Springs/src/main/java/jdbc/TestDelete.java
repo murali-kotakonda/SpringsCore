@@ -15,8 +15,6 @@ public class TestDelete {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"file:src/jdbc/springs.xml");
 		EmployeeDao dao = (EmployeeDao) context.getBean("empDao");
-		// int status = dao.saveEmployee(emp);
-		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("enter name to delete");

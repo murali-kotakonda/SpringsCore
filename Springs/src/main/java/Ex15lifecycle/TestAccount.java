@@ -1,14 +1,16 @@
 package Ex15lifecycle;
 
+/**
+How to specify the init method and destroy method to springs?
+solution:
+1.In springs.xml use destroy-method="<methodname>" along with bean tag.
+2.In springs.xml use init-method="<methodname>"   along with bean tag.
+*/
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
-  How to specify the init method and destroy method to springs?
-  solution:
-  1.In springs.xml use destroy-method="<methodname>" along with bean tag.
-  2.In springs.xml use init-method="<methodname>"   along with bean tag.
- */
+
 public class TestAccount {
 
 	public static void main(String[] args) {

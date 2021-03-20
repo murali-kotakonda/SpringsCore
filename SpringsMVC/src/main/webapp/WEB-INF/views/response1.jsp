@@ -3,7 +3,7 @@
 	<title>Response</title>
 </head>
 <body>
-	 ID = ${id} 
+ ID = ${id} 
  name = ${name}   <br/>
  age = ${age}   <br/>
  sal = ${sal}   <br/>

@@ -4,8 +4,7 @@ import java.lang.reflect.Method;
 
 import org.springframework.aop.MethodBeforeAdvice;
 
-public  class BeforeMethodImpl implements 
-MethodBeforeAdvice{
+public  class BeforeMethodImpl implements MethodBeforeAdvice{
 
 	public void before(Method methodInvocation, Object[] arg1, Object arg2)
 			throws Throwable {

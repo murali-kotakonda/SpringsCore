@@ -54,13 +54,14 @@ public class MyController {
 	 */
 	@RequestMapping(value="/hello1" , method= RequestMethod.GET )
 	public String handleHello1(){
-		return "welcome1";
+		return "welcome1"; //returns the jsp name
 	}
 	
 	//or
+	
 	/**
-			1.client clicks of a link and make a backend call.
-			link : /hello
+     1.client clicks of a link and make a backend call.
+	 link : /hello2
 	
 	response from controller method is ModelAndView object. [jspname + response data]
 	response from controller method is String.[jspname]
@@ -76,12 +77,13 @@ public class MyController {
 	1.client clicks of a link and make a backend call.
 	  link  url: /helloWithData
 	  response page : should get the response data from controller.
-
-	
    
-   addObject take two paarams :
-		1st param : string
-		2nd param : can be any data type 
+   
+	 How to send the data from controller to jsp?
+	 solution:
+	 use addObject() that take two paarams :
+			1st param : string
+			2nd param : data of data type 
 		
 		how to display the dynamic data in jsp:
   		-------------------------------------
@@ -101,6 +103,7 @@ public class MyController {
 	@RequestMapping(value = "/helloWithMultiData1",method = RequestMethod.GET)
 	public ModelAndView getMultiData() {
 		ModelAndView responseObj = new ModelAndView("response1");
+		
 		responseObj.addObject("age", 34);
 		responseObj.addObject("name", "ramesh");
 		responseObj.addObject("id", 3000);
@@ -204,7 +207,7 @@ public class MyController {
 	 */
 	@RequestMapping(value = "/strList", method = RequestMethod.GET)
 	public ModelAndView sendStrrList() {
-		ModelAndView modelAndView = new ModelAndView("empsResponse");
+		ModelAndView modelAndView = new ModelAndView("cityResponse");
 		List<String> names= Arrays.asList("hyd","bang","chennai","mumbai","bangalore");
 		modelAndView.addObject("names", names);
 		return modelAndView;
@@ -467,7 +470,7 @@ when we click on submit button:
 	- ID should start with C_ OR P_     [Invalid Id]
 	- firstName should be min 10 chars
 	- last name should be min 8 chars
-	- password should be betwen 10 to 15 , spaces are not allowed  , 
+	- password should be between 10 to 15 , spaces are not allowed  , 
 	- age should be between 18 & 60
 	
 	If validation is success then show response using show "success.jsp"  -> Registration success

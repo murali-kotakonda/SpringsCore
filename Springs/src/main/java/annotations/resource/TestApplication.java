@@ -1,9 +1,6 @@
 package annotations.resource;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
 
-/**
  /**
  Ex:
 ----------
@@ -20,6 +17,11 @@ and for resolving dependency use  @Resource annotation with bean name
 4.crate main class and get the bean objs.
 
 */
+
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
 public class TestApplication {
 	public static void main(String args[]) {
 		//get context obj

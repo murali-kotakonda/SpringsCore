@@ -55,7 +55,7 @@
 <br>
 		
 <c:forEach items="${msgs}" var="msg1">
- <li>${msg1}</li>
+ <li><font color='red'>${msg1}</font></li>
  </c:forEach>
 <form action="./registerform1" method="post">
 	<table>

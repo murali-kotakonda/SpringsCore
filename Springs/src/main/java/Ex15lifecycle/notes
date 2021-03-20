@@ -46,7 +46,6 @@ save() method
 myClose()
   
   
-  
 
 public class AccountService {
 
@@ -77,18 +76,26 @@ public class AccountService {
 	}
 }
 
-Life cycle:
-----------
-1.init-method = "init"
-2.implements InitializingBean {
+
+How to specify init method? 
+-----------------------------------------
+Approach#1
+ - provide the attribute init-method = "init" in springs.xml
+
+Approach#2
+ - implements InitializingBean {
    public void afterPropertiesSet() {
       // do some initialization work
    }
-
-
-
-1.destroy-method = "destroy"
-2.implements DisposableBean {
+   
+   
+How to specify destroy method? 
+-----------------------------------------
+Approach#1
+ - provide the attribute destroy-method = "destroy" in springs.xml
+ 
+Approach#2
+ -implements DisposableBean {
    public void destroy() {
       // do some destruction work
    }

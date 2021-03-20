@@ -9,7 +9,7 @@ lifetime for bean obj
   
 default scope is singleton.
 
-how to specify bean:
+how to specify bean scope:
 a) in springs.xml along with bean tag provide the scope attribute
 <bean id="uService" class="scopes.UserService" scope="singleton"/>
 <bean id="uService" class="scopes.UserService" scope="prototype"/>

@@ -13,11 +13,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	  
 	 -->
   
-	<bean id="aService" 
-		class="Ex11setterRef.AccountService">
-		<property name="dbName" value="oracle" />  <!-- this will internally calls the setDbName("oracle") method -->
+	<bean id="aService" class="Ex11setterRef.AccountService">
+		<property name="dbName" value="oracle" /> 
 	</bean> 
-	
+	 <!-- this will internally calls the setDbName("oracle") method -->
+
+	 
+	 
 	<!-- spring create the obj for AccountService and set the "Oracle" for dbName.
 	AccountService aService = new AccountService();
 	aService.setDbName("oracle" );

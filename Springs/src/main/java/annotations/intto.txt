@@ -1,17 +1,15 @@
-/Annotations:
---------------
-Dev will specify the config using annotations..
-  
- 
  In springs config can be done using
 - xml
 - annotations
  
+ 
+Annotations:
+--------------
+Dev will specify the config using annotations..
+  
  Where do we need to write the annotations?
  Inside the bean class
  
-  
-
 Annotations for the Bean classes: (write these annotations before class name) 
 =======================================================================================
 @Component  -> Controller / Service/ DAO /Helper
@@ -25,12 +23,6 @@ Annotations for the Bean classes: (write these annotations before class name)
 @Repository, @Service, and @Controller are specializations of @Component for 
 	more specific use cases, for example, in the persistence, service, and presentation layers, respectively
 
-Use the annotations before the class name:
-============================================================
-@Component  -> Controller / Service/ DAO /Helper
-@Controller    -> Controller class
-@Service       -> Service class
-@Repository    -> DAO class
 
 ProductController.java:
 ---------------------------
@@ -85,11 +77,12 @@ public class ProductHelper{
  
   
 Annotations for resolving dependencies:
+[replace property tag and constructor-arg tag]
 =========================================
 (before instance variables / before constr / before setter method)  
 
 
-@Autowired   -> autowire By Type
+@Autowired   ->autowire By Type
 @Resource  -> autowire by name
 [replacement for property tag/constr-arg ]
 
@@ -97,8 +90,17 @@ Annotations for resolving dependencies:
 
 ex1:
 ProductController has ProductService as dependency
-using xml:
------------------------------------------------------------------------------
+ 
+ autowire 
+------------
+reduces the effort of writing properties or constructor arguments
+skip the some of configuration in XML file.
+
+AUTO-WIRING "BYNAME" ->@Resource
+AUTO-WIRING "BYTYPE"  ->@Autowired
+AUTO-WIRING "CONSTRUCTOR" -> @Autowired before constr 
+
+
 ProductService.java
 public class ProductService{
                                             
@@ -113,7 +115,7 @@ public class ProductController{
 }
 
 
-xml:
+using xml:
  <bean id ="pService" class="ProductService" >
   </bean>
   
@@ -180,6 +182,19 @@ public class ApplicationConfig {
  
 }
   
+
+
+<bean id ="" class=" scope="prototype" initMethod = "init", destroyMethod = "cleanup"/>
+
+@Configuration
+public class HelloWorldConfig {
+   @Bean(initMethod = "init", destroyMethod = "cleanup" )
+   @Scope("prototype")
+   public HelloWorld helloWorld(){
+      return new HelloWorld();
+   }
+}
+
 
 
 How to get bean obj:-

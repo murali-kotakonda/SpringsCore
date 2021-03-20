@@ -15,7 +15,7 @@ Id == ${emp.id}<br/>
 
 
 <c:if test="${empty emp.address}">
-    address isnot  available
+    address is not  available
 </c:if>
 <c:if test="${not empty emp.address}">
     address is   available

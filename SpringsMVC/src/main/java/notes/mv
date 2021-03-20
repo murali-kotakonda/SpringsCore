@@ -93,8 +93,7 @@ add build:
     </build>
     
 5.Update the maven project   
-    
- 5.Update the maven project   
+
 
 6.Add "java" and "test" folders under the src/main
  
@@ -116,14 +115,17 @@ web.xml changes
 10.Go to the Deployment-assembly
 click on add entry for '/WEB-INF/lib'
 
+11.create springs.xml under /WEB-INF
 
 
-11.run the application using web server
-
-12.create springs.xml under /WEB-INF
-
-13.create "views" folder under  /WEB-INF
+12.create "views" folder under  /WEB-INF
 views will contain the jsps
+
+
+
+13.run the application using web server
+
+
 
 
 
@@ -151,28 +153,16 @@ Display the message in the JSP page
 Load the spring core and mvc jar files
 Start server and deploy the project
 
-
- 
- 
- 
  
 DispatcherServlet
 -----------------
  - DispatcherServlet first receives the request.
- - DispatcherServlet consults the HandlerMapping and 
- invokes the Controller associated with the request.
- - Controller process the request by calling the 
- appropriate service methods and returns a 
- ModeAndView object to the DispatcherServlet. 
- The ModeAndView object contains the model data 
- and the view name.
- - DispatcherServlet sends the view name to a 
- ViewResolver to
-  find the actual View to invoke.
- -  DispatcherServlet will pass the model object 
- to the View to render the result.
-- View with the help of the model data will 
-render the result back to the user.
+ - DispatcherServlet consults the HandlerMapping and  invokes the Controller associated with the request.
+ - Controller process the request by calling the  appropriate service methods and returns a   ModeAndView object to the DispatcherServlet. 
+ The ModeAndView object contains the model data  and the view name.
+ - DispatcherServlet sends the view name to a  ViewResolver to   find the actual View to invoke.
+ -  DispatcherServlet will pass the model object   to the View to render the result.
+- View with the help of the model data will  render the result back to the user.
 
 view resolver config:
 ------------------------

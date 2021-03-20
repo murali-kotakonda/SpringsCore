@@ -74,7 +74,17 @@ map1.put("id", "20000"); //<entry key="id" value="20000" />
 map1.put("name", "kumar"); //<entry key="name" value="kumar" />
 map1.put("age", "34"); //<entry key="age" value="34" />
 
-
+	<map>
+				<entry key="config1" value="user1" ></entry>
+				<entry key="config2" value="user2"></entry>
+				<entry key="config3" value="user3"></entry>
+			</map>
+			
+	Map<String,String> map1 = new HashMap<>();
+map1.put("config1", "user1"); //<entry key="config1" value="user1" ></entry>
+map1.put("config2", "user2"); //<entry key="config2" value="user2"></entry>
+map1.put("config3", "user3"); //	<entry key="config3" value="user3"></entry>		
+			
 
 meaning of  configuration:
 -----------------------------

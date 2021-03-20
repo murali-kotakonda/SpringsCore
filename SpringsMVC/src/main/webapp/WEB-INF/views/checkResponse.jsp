@@ -10,7 +10,8 @@
 <body>
 
 <c:if test="${age lt 18 }">
-   Invalid age
+   Invalid age  ${age}
+   
 </c:if>
 
 <c:if test="${age == 18 }">
@@ -22,10 +23,11 @@
     name is empty
 </c:if>
 
-
 <c:if test="${not empty  name }">
-    name is not empty
+    name is not empty  : ${name}
 </c:if>
+
+
 
 
 </body>

@@ -10,9 +10,10 @@ public class TestInsert {
 
 		// get dao object from springs
 		ApplicationContext context = 
-				new ClassPathXmlApplicationContext("file:src/jdbc/springs.xml");
+				new ClassPathXmlApplicationContext("file:src/main/java/jdbc/springs.xml");
 		EmployeeDao dao = (EmployeeDao) context.getBean("empDao");
 
+	    //take input for name, id, sal
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("enter name");
