@@ -1,7 +1,7 @@
 spring mvc + hib setup:
 -------------------------------------
 1.create eclipse project
-2a)import springs + hib jars
+2a)import springs + hib jars using maven pom.xml
 2b)need web.xml
 add <servlet> for Dispatcher Servlet in web.xml with the path for springs.xml
 2c)Provide springs.xml

@@ -646,7 +646,7 @@ when we click on submit button:
 	 * session tracking:
 
 		Session: 
-		Http is a stateless protocaol.
+		Http is a stateless protocal.
 		server will not recognize the client.
 		Every request is New.
 		
@@ -656,19 +656,19 @@ when we click on submit button:
 		
 		client identification
 		-> sessions
+		 -> cookies
 		
 		Session obj is created seperately for every customer.
 		Session should contain the customer basic info
 		session data is available for a long time,.
-		Session obj coantains the customer info.
-	session data is available till customer logout or deletes the cookies.		
+	    session data is available till customer logout or deletes the cookies or session is expired		
 		
-	-> how to add session data
 			[if the data is added to the session , then the data is available to all the pages .
 			ex: 
 			 if we add a data to session obj during the login page, then the data is available to all the pages.
 			 until logout or until session is invalidated.
 			]
+	-> how to add session data / how to add data to session obj
 	    session.setAttribute("myName", userName);
 	-> how to read the session data
 	   String userName = (String) session.getAttribute("myName"); 

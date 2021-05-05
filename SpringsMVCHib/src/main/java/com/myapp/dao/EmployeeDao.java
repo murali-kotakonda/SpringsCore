@@ -20,7 +20,7 @@ import com.myapp.dto.EmployeeListResponse;
 @Repository("empDao")
 public class EmployeeDao {
 
-	static int resultsPerPage;
+	static int resultsPerPage = 5;
 	static Properties props;
 	
 	static {
@@ -176,7 +176,8 @@ public class EmployeeDao {
 	#page 4 print from FirstRecord :15  to 19
 	#page 5 print from FirstRecord :20 to 24
 	#page 6 print from FirstRecord :25 to 28
-
+    #page n print from FirstRecord :(n -1) * pageSize 
+    
 	i/p:
 	pageNo : 5
 	find the firstRecord
@@ -189,10 +190,13 @@ public class EmployeeDao {
 		long count = (Long)query2.uniqueResult();
 		
 		Query query = sf.createQuery("from Employee");
-		query.setMaxResults(resultsPerPage);
+		
+		
 		int fr =(pageId-1)*resultsPerPage;
 		long noOfPages = count%resultsPerPage == 0? count/resultsPerPage :(count/resultsPerPage )+1;
 		query.setFirstResult(fr);
+		query.setMaxResults(resultsPerPage);
+		
 		List<Employee> list =(List<Employee>)  query.list();
 		sf.close();
 		

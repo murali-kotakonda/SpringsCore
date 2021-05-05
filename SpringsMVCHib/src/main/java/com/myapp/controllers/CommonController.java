@@ -33,7 +33,7 @@ public class CommonController {
 	Provide the Register functionality.
 	When customer clicks on "Register" link show register page.
 	customer will enter data ON register page and clicks on "submit"  -> if validation is success
-	in backend save a row in "Employee_Details" table.
+	in back-end save a row in "Employee_Details" table.
 	
 	 */
 	@RequestMapping("/register")

@@ -38,7 +38,7 @@ public class UserController {
 	
 	Requirement:
 	------------------
-	capture the following info from the web page:
+	capture the following info from the web page and show the submitted data in response jsp
 	  firstname
 	  lastname   
 	  email
@@ -49,20 +49,21 @@ public class UserController {
 	  idProofs  - checkbox
 	  address  - textarea
 	  
-	  
-	  Technically:
+	 Technically:
 	-----------------------
 	  reqPage  jsp
 	  response jsp
-	  
+	  controller method
 	
 	Java changes:
-	
 	1.Create new Controller: UserController.java
 	2.Create a pojo class : UserInfo.java
 	  for every web page that has a  form there is a  associated java class
 	  
-	Since Springs is perforimg req capturing + setting data we need to use the spring tags 
+	 Since Springs is perforimg req capturing + setting data in the pojo obj.
+     - we need to use the spring tags in req jsp
+     - use @ModelAttribute in controller method.
+   
 	the field name in addUser.jsp is equal to the instance variable of UserInfo.java
 	
 	In web page use  : spring tags
@@ -264,7 +265,7 @@ public class UserController {
 	//click on link on home.jsp
 	/**
 	Req:
-	Validation on syntax for email and password on login page
+	Validation on syntax for email and password on login page uisng validator framework
 
 	New:
 	------------
@@ -273,26 +274,23 @@ public class UserController {
 	use annotations for validations.
 		@NotEmpty
 		@Email
-	  @NotEmpty(message = "Please enter your password.")
+	   @NotEmpty(message = "Please enter your password.")
 		@Size(min = 6, max = 15,message = "Your password must between 6 and 15 characters")
 		
 	 */
 	@RequestMapping(value = "/validateLogin", method = RequestMethod.GET)
-		public ModelAndView viewLogin() {
-			return new ModelAndView("LoginForm", "userForm", new User());
-		}
+	public ModelAndView viewLogin() {
+		return new ModelAndView("LoginForm", "userForm", new User());
+	}
 
 	//click on button on LoginForm.jsp
-		@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
-		public String doLogin(
-				@Valid 
-				@ModelAttribute("userForm") User userForm,
-				BindingResult result) {
-			if (result.hasErrors()) {
-				return "LoginForm";
-			}
-			return "LoginSuccess";
+	@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
+	public String doLogin(@Valid @ModelAttribute("userForm") User userForm, BindingResult result) {
+		if (result.hasErrors()) {
+			return "LoginForm";
 		}
+		return "LoginSuccess";
+	}
 		
 		
 	/**

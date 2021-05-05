@@ -34,52 +34,7 @@ public class EmployeeController {
 	@Autowired
 	private MessageSource messageSource;
 
-	/**
-	Req:
-	logined user can also create a employee using the "Add Emp" link.
-	1.click on "Add Emp" Link     --> need a controller method
-	show the add employe form
 	
-	2.Fill the data for fName, lname, age ,email , salary, loginname , password
-	and click on "Add employee" Button  --> need a controller method
-	 */
-	
-	 //controller method for click on "Add Emp" Link and show response using "showAddEmp.jsp"
-	@RequestMapping("/addEmp")
-	public ModelAndView showAddEmpByUser() {
-		Employee employee = new Employee();
-		return new ModelAndView("showAddEmp", "command", employee);
-	}
-
-	/**
-	   controller method customer  clicks on "Add Emp" Button and
-	   If success show response using "showEmp.jsp"
-	    If failure show response with error msg using "showAddEmp.jsp"
-	    emp.jsp is reused for "My Profile" and "Add User" (Success) scenarios.
-	 */
-	@RequestMapping(value = "/addEmp", method = RequestMethod.POST)
-	public ModelAndView addEmpByUser(@Valid 
-			@ModelAttribute("employee") 
-			Employee employee, BindingResult result) {
-		if (result.hasErrors()) {
-			String message = "Error while creating emp";//getErrorMsg(result);
-			ModelAndView model = new ModelAndView("showAddEmp", "command", employee);
-			model.addObject("msg", message);
-			return model;
-		}
-		try {
-			employeeService.addEmployee(employee);
-		} catch (UserException e) {
-			String msg = e.getMessage();
-			ModelAndView modelAndView = new ModelAndView("showAddEmp", "command", employee);
-			modelAndView.addObject("msg", msg);
-			return modelAndView;
-		}
-		ModelAndView model = new ModelAndView("showEmp", "emp", employee);
-		model.addObject("msg", "Employee Created!");
-		return model;
-	}
-
 	 /*controller method when customer clicks on "show all users" link
 	   show response using showEmps.jsp
 	  url writing:
@@ -161,8 +116,6 @@ public class EmployeeController {
 		Employee emp = employeeService.getEmpById(empId);
 		return new ModelAndView("showEditEmp", "command", emp);
 	}
-	
-	
 	/**
 	 controller method to update employee .
 	 On click of "Update Emp" , the new data should be updated for the employee......
@@ -231,4 +184,51 @@ public class EmployeeController {
 		}
 		return message;
 	}
+	
+	/**
+	Req:
+	logined user can also create a employee using the "Add Emp" link.
+	1.click on "Add Emp" Link     --> need a controller method
+	show the add employe form
+	
+	2.Fill the data for fName, lname, age ,email , salary, loginname , password
+	and click on "Add employee" Button  --> need a controller method
+	 */
+	
+	 //controller method for click on "Add Emp" Link and show response using "showAddEmp.jsp"
+	@RequestMapping("/addEmp")
+	public ModelAndView showAddEmpByUser() {
+		Employee employee = new Employee();
+		return new ModelAndView("showAddEmp", "command", employee);
+	}
+
+	/**
+	   controller method customer  clicks on "Add Emp" Button and
+	   If success show response using "showEmp.jsp"
+	    If failure show response with error msg using "showAddEmp.jsp"
+	    emp.jsp is reused for "My Profile" and "Add User" (Success) scenarios.
+	 */
+	@RequestMapping(value = "/addEmp", method = RequestMethod.POST)
+	public ModelAndView addEmpByUser(@Valid 
+			@ModelAttribute("employee") 
+			Employee employee, BindingResult result) {
+		if (result.hasErrors()) {
+			String message = "Error while creating emp";//getErrorMsg(result);
+			ModelAndView model = new ModelAndView("showAddEmp", "command", employee);
+			model.addObject("msg", message);
+			return model;
+		}
+		try {
+			employeeService.addEmployee(employee);
+		} catch (UserException e) {
+			String msg = e.getMessage();
+			ModelAndView modelAndView = new ModelAndView("showAddEmp", "command", employee);
+			modelAndView.addObject("msg", msg);
+			return modelAndView;
+		}
+		ModelAndView model = new ModelAndView("showEmp", "emp", employee);
+		model.addObject("msg", "Employee Created!");
+		return model;
+	}
+
 }
